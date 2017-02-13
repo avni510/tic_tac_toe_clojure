@@ -1,6 +1,6 @@
 (defproject tic_tac_toe_clojure "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+  :description "tic tac toe human v. unbeatable computer"
+  :url "https://github.com/avni510/tic_tac_toe_clojure"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.7.0-RC2"]]
