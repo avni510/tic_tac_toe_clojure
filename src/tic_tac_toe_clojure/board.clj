@@ -5,14 +5,11 @@
    "" "" ""
    "" "" ""
    "" "" ""
-  ]
-)
+  ])
 
 (defn get-board [board-vector]
-  board-vector
-)
+  board-vector)
 
 (defn fill-board [board index marker]
-  (assoc board index marker)
-)
+  (assoc board index marker))
 
