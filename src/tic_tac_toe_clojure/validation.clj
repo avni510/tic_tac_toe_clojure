@@ -1,4 +1,5 @@
-(ns tic-tac-toe-clojure.validation)
+(ns tic-tac-toe-clojure.validation
+  (:require [tic-tac-toe-clojure.helpers :as helpers]))
 
 (def board-min
   0)
@@ -8,13 +9,10 @@
 
 (defn- cell-occupied? [board index]
   (let [cell (nth board (read-string index))]
-    (not (empty? cell))))
-
-(defn- is-num? [input]
-  (number? (read-string input)))
+    (not (helpers/is-num? cell))))
 
 (defn- invalid-position? [board user-input]
-  (if (not (apply is-num? [user-input]))
+  (if (not (apply helpers/is-num? [user-input]))
     true
     (not (<= board-min (read-string user-input) (board-max board)))))
 
@@ -22,4 +20,4 @@
   (cond 
     (invalid-position? board move) {:errors "Please enter an integer between 0 and 8"}
     (cell-occupied? board move) {:errors "This cell is taken, please enter another move"}
-    :else nil))
+    :else {:errors nil}))

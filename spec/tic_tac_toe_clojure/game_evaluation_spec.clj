@@ -3,7 +3,7 @@
             [tic-tac-toe-clojure.game-evaluation :refer :all]))
 
 (describe "GameEvaluation"
-  (it "returns a string if the game is tied"
+  (it "returns true if the game is tied"
     (should= true 
               (tied? 
                [ 
@@ -16,9 +16,9 @@
     (should= false 
              (tied? 
               [ 
-                "X" "" "X"
+                "X" "1" "X"
                 "O" "X" "O"
-                "" "O" "X"
+                "6" "O" "X"
               ])))
 
   (context "won by row" 
@@ -27,34 +27,34 @@
                (winning-marker
                 [ 
                   "X" "X" "X"
-                  "O" "" ""
-                  "" "O" ""
+                  "O" "4" "5"
+                  "6" "O" "8"
                 ])))
 
     (it "returns false if the game is not won"
       (should= nil
                (winning-marker 
                 [ 
-                  "X" "" "X"
-                  "O" "" ""
-                  "" "O" ""
+                  "X" "1" "X"
+                  "O" "4" "5"
+                  "6" "O" "8"
                 ])))
 
     (it "returns true if the game is won by the second row all being the same marker"
       (should= "X"
                (winning-marker 
                 [ 
-                  "O" "" ""
+                  "O" "1" "2"
                   "X" "X" "X"
-                  "" "O" "O"
+                  "6" "O" "O"
                 ])))
 
     (it "returns true if the game is won by the third row all being the same marker"
       (should= "O"
                (winning-marker 
                 [ 
-                  "X" "" ""
-                  "X" "" "X"
+                  "X" "1" "2"
+                  "X" "4" "X"
                   "O" "O" "O"
                 ]))))
 
@@ -63,9 +63,9 @@
       (should= "O"
                (winning-marker 
                 [ 
-                  "O" "" ""
+                  "O" "1" "2"
                   "O" "X" "X"
-                  "O" "" ""
+                  "O" "7" "8"
                 ])))
 
 
@@ -73,27 +73,27 @@
       (should= "X"
                (winning-marker
                 [ 
-                  "" "X" ""
-                  "" "X" "O"
-                  "O" "X" ""
+                  "0" "X" "2"
+                  "3" "X" "O"
+                  "O" "X" "8"
                 ])))
 
     (it "returns true if the game is won by the third column all being the same value" 
       (should= "O"
                (winning-marker 
                 [ 
-                  "" "" "O"
-                  "X" "" "O"
-                  "X" "" "O"
+                  "0" "1" "O"
+                  "X" "4" "O"
+                  "X" "7" "O"
                 ])))
 
     (it "returns false if the game is not won"
       (should= nil
                (winning-marker 
                 [ 
-                  "" "" ""
-                  "" "O" ""
-                  "" "" ""
+                  "0" "1" "2"
+                  "3" "O" "5"
+                  "6" "7" "8"
                 ]))))
 
   (context "won by diagonal"
@@ -127,17 +127,17 @@
     (should= false
              (game-over?
               [ 
-                "O" "" "O"
+                "O" "1" "O"
                 "X" "O" "O"
-                "" "X" "X"
+                "6" "X" "X"
               ])))
 
   (it "returns true if the game is won by the third column all being the same value" 
     (should= true
              (game-over? 
               [ 
-                "" "" "O"
-                "X" "" "O"
-                "X" "" "O"
+                "1" "2" "O"
+                "X" "4" "O"
+                "X" "7" "O"
               ]))))
 

@@ -1,7 +1,8 @@
-(ns tic-tac-toe-clojure.game-evaluation)
+(ns tic-tac-toe-clojure.game-evaluation
+  (:require [tic-tac-toe-clojure.helpers :as helpers]))
 
 (defn- same-marker? [cell1 cell2 cell3]
-  (and (= cell1 cell2 cell3) (not-empty cell1)))
+  (= cell1 cell2 cell3))
 
 (defn- won-by-rows [board]
   (let [[cell0 cell1 cell2 cell3 cell4 cell5 cell6 cell7 cell8] board]
@@ -27,7 +28,7 @@
       :else nil)))
 
 (defn tied? [current-board]
-  (every? not-empty current-board))
+  (not-any? helpers/is-num? current-board))
 
 (defn winning-marker [current-board]
   (or (won-by-rows current-board) 
