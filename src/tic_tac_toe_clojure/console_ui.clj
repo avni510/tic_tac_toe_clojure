@@ -2,3 +2,6 @@
 
 (defn print-message [message]
   (println message))
+
+(defn get-user-input []
+  (read-line))

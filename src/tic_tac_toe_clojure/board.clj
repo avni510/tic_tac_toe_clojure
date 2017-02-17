@@ -11,5 +11,6 @@
   board-vector)
 
 (defn fill-board [board index marker]
-  (assoc board index marker))
+  (let [index-num (read-string index)]
+    (assoc board index-num marker)))
 
