@@ -6,32 +6,32 @@
   (describe "get-board" 
     (it "returns an empty board"
       (should= [ 
-                 "0" "1" "2"
-                 "3" "4" "5"
-                 "6" "7" "8"
+                 0 1 2
+                 3 4 5
+                 6 7 8
                ] 
                (get-board empty-board))))
 
   (describe "fill-board"
     (it "returns a board with a filled in marker" 
       (should= [ 
-                 "0" "X" "2"
-                 "3" "4" "5"
-                 "6" "7" "8"
+                 0 :x 2
+                 3  4 5
+                 6  7 8
                ] 
-               (fill-board empty-board "1" "X"))
+               (fill-board empty-board 1 :x))
 
       (should= [ 
-                  "X" "1" "2"
-                  "3" "4" "X"
-                  "O" "O" "O"
+                 :x  1  2
+                 3   4  :x
+                 :o  :o :o
                ] 
                (fill-board 
                  [ 
-                  "X" "1" "2"
-                  "3" "4" "X"
-                  "O" "O" "5"
+                   :x  1   2
+                   3   4  :x
+                   :o  :o  8
                  ] 
-                 "8" 
-                 "O")))))
+                 8 
+                 :o)))))
 

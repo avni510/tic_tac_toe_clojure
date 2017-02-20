@@ -3,12 +3,13 @@
             [tic-tac-toe-clojure.validation :refer :all]))
 
 (def current-board
-  ["X" "1" "2"
-   "3" "4" "X"
-   "O" "O" "X"])
+   [:x  1   2
+    3   4  :x
+    :o  :o :x])
 
 (describe "Validation"
   (describe "execute"
+
     (it "returns an error string if the cell is taken"
       (should= {:errors "This cell is taken, please enter another move"}
                (execute current-board "0")))
@@ -32,4 +33,3 @@
     (it "returns nil if the input is a number between 0 to 8"
       (should= {:errors nil}
                (execute current-board "2")))))
-

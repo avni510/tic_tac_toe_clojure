@@ -28,7 +28,7 @@
       :else nil)))
 
 (defn tied? [current-board]
-  (not-any? helpers/is-num? current-board))
+  (not-any? number? current-board))
 
 (defn winning-marker [current-board]
   (or (won-by-rows current-board) 

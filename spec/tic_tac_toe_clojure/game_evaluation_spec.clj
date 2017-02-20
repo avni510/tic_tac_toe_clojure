@@ -8,112 +8,112 @@
       (should= true 
                 (tied? 
                  [ 
-                   "X" "O" "X"
-                   "O" "X" "O"
-                   "X" "O" "X"
+                   :x :o :x
+                   :o :x :o
+                   :x :o :x
                  ])))
                  
     (it "returns false if the game is not tied"
       (should= false 
                (tied? 
                 [ 
-                  "X" "1" "X"
-                  "O" "X" "O"
-                  "6" "O" "X"
+                 :x  1 :x
+                 :o :x :o
+                 6  :o :x
                 ]))))
 
   (describe "winning-marker"
     (context "won by row" 
       (it "returns a string if the game is won by the first row all being the same marker"
-        (should= "X"
+        (should= :x
                  (winning-marker
                   [ 
-                    "X" "X" "X"
-                    "O" "4" "5"
-                    "6" "O" "8"
+                   :x :x :x
+                   :o  4  5
+                    6  :o 8
                   ])))
 
       (it "returns false if the game is not won"
         (should= nil
                  (winning-marker 
                   [ 
-                    "X" "1" "X"
-                    "O" "4" "5"
-                    "6" "O" "8"
+                   :x 1 :x
+                   :o  4  5
+                    6  :o 8
                   ])))
 
       (it "returns true if the game is won by the second row all being the same marker"
-        (should= "X"
+        (should= :x 
                  (winning-marker 
                   [ 
-                    "O" "1" "2"
-                    "X" "X" "X"
-                    "6" "O" "O"
+                   :o   1  2
+                   :x  :x  :x
+                    6  :o  :o
                   ])))
 
       (it "returns true if the game is won by the third row all being the same marker"
-        (should= "O"
+        (should= :o
                  (winning-marker 
                   [ 
-                    "X" "1" "2"
-                    "X" "4" "X"
-                    "O" "O" "O"
+                   :x  1  2
+                   :x  4  :x
+                   :o  :o  :o
                   ]))))
 
     (context "won by column"
       (it "returns true if the game is won by the first column all being the same value" 
-        (should= "O"
+        (should= :o
                  (winning-marker 
                   [ 
-                    "O" "1" "2"
-                    "O" "X" "X"
-                    "O" "7" "8"
+                   :o  1  2
+                   :o  :x  :x
+                   :o  7  8
                   ])))
 
 
       (it "returns true if the game is won by the second column all being the same value" 
-        (should= "X"
+        (should= :x
                  (winning-marker
                   [ 
-                    "0" "X" "2"
-                    "3" "X" "O"
-                    "O" "X" "8"
+                   0  :x  2
+                   3  :x  :o
+                   :o  :x  8
                   ])))
 
       (it "returns true if the game is won by the third column all being the same value" 
-        (should= "O"
+        (should= :o
                  (winning-marker 
                   [ 
-                    "0" "1" "O"
-                    "X" "4" "O"
-                    "X" "7" "O"
+                   0   1  :o
+                   :x  4  :o
+                   :x  7  :o
                   ])))
 
       (it "returns false if the game is not won"
         (should= nil
                  (winning-marker 
                   [ 
-                    "0" "1" "2"
-                    "3" "O" "5"
-                    "6" "7" "8"
+                   0   1  2
+                   3  :o  5
+                   6   7  8
                   ]))))
 
     (context "won by diagonal"
       (it "returns true if the game is won by a diagonal all being the same value"
-        (should= "X"
+        (should= :x
                  (winning-marker
                   [ 
-                    "X" "O" "O"
-                    "O" "X" "O"
-                    "X" "O" "X"
+                   :x  :o :o
+                   :o  :x  :o
+                   :x  :o  :x
                   ]))
 
-        (should= "O"
+        (should= :o
                  (winning-marker 
                   [ 
-                    "O" "X" "O"
-                    "X" "O" "O"
-                    "O" "X" "X"
+                   :o  :x  :o
+                   :x  :o  :o
+                   :o  :x  :x
                   ])))))
 
   (describe "game-over"
@@ -121,26 +121,26 @@
       (should= true
                (game-over?
                 [ 
-                  "O" "X" "O"
-                  "X" "O" "O"
-                  "O" "X" "X"
+                 :o  :x  :o
+                 :x  :o  :o
+                 :o  :x  :x
                 ])))
 
     (it "returns false if the game is not over"
       (should= false
                (game-over?
                 [ 
-                  "O" "1" "O"
-                  "X" "O" "O"
-                  "6" "X" "X"
+                 :o  1  :o
+                 :x  :o :o
+                 6   :x :x
                 ])))
 
     (it "returns true if the game is won by the third column all being the same value" 
       (should= true
                (game-over? 
                 [ 
-                  "1" "2" "O"
-                  "X" "4" "O"
-                  "X" "7" "O"
+                 0   1 :o
+                 :x  4 :o
+                 :x  7 :o
                 ])))))
 
