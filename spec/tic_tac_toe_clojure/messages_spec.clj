@@ -40,5 +40,15 @@
                (board-string 
                 [ 0  :x  :o
                   3  :o  :x
-                  :o  :x  :o])))))
+                  :o  :x  :o]))))
+          
+  (describe "game-instructions"
+    (it "displays instructions for the game"
+      (should= "Please select your marker by entering a character between A-Z"
+               (game-instructions))))
+  
+  (describe "blank-space"
+    (it "displays a blank space"
+      (should= " "
+               (blank-space)))))
 

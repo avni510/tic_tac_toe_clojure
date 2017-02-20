@@ -37,3 +37,8 @@
        (convert-to-string (nth board 7)) " | " 
        (convert-to-string (nth board 8)) "\n"))
 
+(defn game-instructions  []
+  "Please select your marker by entering a character between A-Z")
+
+(defn blank-space []
+  " ")

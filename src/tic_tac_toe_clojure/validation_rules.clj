@@ -1,5 +1,4 @@
-(ns tic-tac-toe-clojure.validation-rules
-  (:require [tic-tac-toe-clojure.helpers :as helpers]))
+(ns tic-tac-toe-clojure.validation-rules)
 
 (def board-min
   0)
@@ -13,4 +12,7 @@
 
 (defn invalid-cell? [board input-cell]
   (not (<= board-min input-cell (board-max board))))
+
+(defn invalid-marker? [input-marker]
+  (not (boolean (re-matches #"[a-z]|[A-Z]" input-marker))))
 
