@@ -19,7 +19,7 @@
                  3  4 5
                  6  7 8
                ] 
-               (fill-board empty-board 1 :x))
+               (fill-board 1 empty-board :x))
 
       (should= [ 
                  :x  1  2
@@ -27,11 +27,11 @@
                  :o  :o :o
                ] 
                (fill-board 
+                 8
                  [ 
                    :x  1   2
                    3   4  :x
                    :o  :o  8
-                 ] 
-                 8 
+                 ]  
                  :o)))))
 

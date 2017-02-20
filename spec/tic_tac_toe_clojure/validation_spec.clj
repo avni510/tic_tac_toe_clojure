@@ -22,6 +22,10 @@
       (should= {:errors "This selection is invalid, please enter an integer between 0 and 8"}
                (execute-move current-board "hello world")))
 
+    (it "returns an error string if the input for a move is a string"
+      (should= {:errors "This selection is invalid, please enter an integer between 0 and 8"}
+               (execute-move current-board "      ")))
+
     (it "returns an error string if the input is a number less than 0"
       (should= {:errors "This selection is invalid, please enter an integer between 0 and 8"}
                (execute-move current-board "-1")))

@@ -2,4 +2,4 @@
   (:require [tic-tac-toe-clojure.helpers :as helpers]))
   
 (defn is-num? [input]
-  (number? (read-string input)))
+  (and (not (empty? input)) (boolean (re-matches #"\d*" input))))
