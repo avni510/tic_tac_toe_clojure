@@ -4,12 +4,15 @@
 
 (def tied-board
  [ 
-  :x  :x  :o
+  :x  :o  :o
   :o  :x  :x
   :o  :x  :o ])
 
 (describe "Game Completion"
   (describe "game-over-message"
+    (around [it]
+      (with-out-str (it)))
+
     (it "displays a tied message if the game is tied"
       (should= "The game ended in a tie" (game-over-message tied-board)))
     

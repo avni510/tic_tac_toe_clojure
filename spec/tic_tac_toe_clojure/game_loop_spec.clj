@@ -30,26 +30,28 @@
 
     (it "continues to ask the user for their move until the game is tied"
       (should= [             
-                 :x  :x  :o
+                 :x  :o  :o
                  :o  :x  :x
                  :o  :x  :o ]
-                (with-in-str "3\n1\n2\n7\n8\n4" (run [            
-                                                      :x  1   2
-                                                      3   4  :x
-                                                      :o  7  8 
-                                                     ]
-                                                     :o 
-                                                     :x))))
+                (with-in-str "7\n3" 
+                (run [ 
+                      :x  :o  :o
+                       3  :x  :x
+                      :o  7  :o  
+                     ]
+                     :x 
+                     :o))))
 
     (it "continues to ask the user for their move until the game is won"
       (should= [             
                 0    1  :o
                 3   :o   5
                 :x  :x  :x ]
-                (with-in-str "6\n2\n7\n4\n8" (run [            
-                                                      0  1  2
-                                                      3  4  5
-                                                      6  7  8 
-                                                     ]
-                                                     :x 
-                                                     :o))))))
+                (with-in-str "6\n2\n7\n4\n8" 
+                (run [
+                       0  1  2
+                       3  4  5
+                       6  7  8 
+                      ]
+                      :x 
+                      :o))))))

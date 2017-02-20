@@ -8,9 +8,9 @@
       (should= true 
                 (tied? 
                  [ 
-                   :x :o :x
-                   :o :x :o
-                   :x :o :x
+                  :x :o :x
+                  :o :x :o
+                  :x :o :x
                  ])))
                  
     (it "returns false if the game is not tied"
@@ -84,7 +84,7 @@
         (should= :o
                  (winning-marker 
                   [ 
-                   0   1  :o
+                    0  1  :o
                    :x  4  :o
                    :x  7  :o
                   ])))
@@ -139,7 +139,7 @@
       (should= true
                (game-over? 
                 [ 
-                 0   1 :o
+                  0  1 :o
                  :x  4 :o
                  :x  7 :o
                 ])))))
