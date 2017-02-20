@@ -36,6 +36,3 @@
     (recur (player-turn current-board current-marker) 
            opponent-marker current-marker)))
 
-
-  
-
