@@ -42,3 +42,13 @@
 
 (defn blank-space []
   " ")
+
+(defn invalid-player-type []
+  "This player type does not exist")
+
+(defn computer-move [cell]
+  (str "The computer selected cell " cell))
+
+(defn computer-marker [marker]
+  (str "The computer is marker " (string/upper-case (name marker))))
+  

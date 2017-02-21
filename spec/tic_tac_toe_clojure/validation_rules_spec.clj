@@ -39,7 +39,7 @@
       (should= true (invalid-marker? "hello world")))
           
     (it "returns false if the input is a lower case character of the alphabet"
-      (should= false (invalid-marker? "o")))
+      (should= false (invalid-marker? "x")))
 
     (it "returns false if the input is an upper case character of the alphabet"
       (should= false (invalid-marker? "X")))))

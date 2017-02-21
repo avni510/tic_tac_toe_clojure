@@ -2,6 +2,7 @@
   (:require [tic-tac-toe-clojure.validation :as validation]
             [tic-tac-toe-clojure.messages :as messages]
             [tic-tac-toe-clojure.console-ui :as console-ui]
+            [tic-tac-toe-clojure.player-setup :as player-setup]
             [clojure.string :as string]))
 
 (defn- invalid-marker [errors-hash]
@@ -22,3 +23,11 @@
     (valid-marker-loop)
     (string/lower-case)
     (keyword)))
+
+(defn create-players [human-marker]
+  (let [human-player-map (player-setup/create-human-player human-marker) 
+        computer-player-map (player-setup/create-computer-player human-marker)]
+    (console-ui/print-message (messages/computer-marker (:marker computer-player-map)))
+    (console-ui/print-message (messages/blank-space))
+    [human-player-map computer-player-map]))
+

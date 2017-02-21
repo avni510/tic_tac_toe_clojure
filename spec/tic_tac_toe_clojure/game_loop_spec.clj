@@ -13,45 +13,32 @@
     (around [it]
       (with-out-str (it)))
 
-    (it "prompts the user to enter their move and returns a new board" 
-      (should=  [           
-                 :x  1   2
-                  3  4  :x
-                 :o  :o  :o] 
-                (with-in-str "8" (run current-board :o :x))))
-
-    (context "the user enters an invalid move"
-      (it "continues to prompts the user to enter another move"
+    (context "the game ends in a tie"
+      (it "continues to ask the user for their move until the game is over"
         (should= [             
-                  :x  1   2
-                  3   4  :x
-                  :o  :o  :o] 
-                 (with-in-str "8\n#\n    \nfive\n4.35" (run current-board :o :x)))))
+                   :x  :o  :o
+                   :o  :x  :x
+                   :o  :x  :o ]
+                  (with-in-str "7\n3" 
+                  (run [ 
+                        :x  :o  :o
+                         3  :x  :x
+                        :o  7  :o  
+                       ]
+                       {:player-type :human :marker :x }
+                       {:player-type :human :marker :o })))))
 
-    (it "continues to ask the user for their move until the game is tied"
-      (should= [             
-                 :x  :o  :o
-                 :o  :x  :x
-                 :o  :x  :o ]
-                (with-in-str "7\n3" 
-                (run [ 
-                      :x  :o  :o
-                       3  :x  :x
-                      :o  7  :o  
-                     ]
-                     :x 
-                     :o))))
-
-    (it "continues to ask the user for their move until the game is won"
-      (should= [             
-                0    1  :o
-                3   :o   5
-                :x  :x  :x ]
-                (with-in-str "6\n2\n7\n4\n8" 
-                (run [
-                       0  1  2
-                       3  4  5
-                       6  7  8 
-                      ]
-                      :x 
-                      :o))))))
+    (context "the game is won by player x"
+      (it "continues to ask the user for their move until the game is over"
+        (should= [             
+                  0    1  :o
+                  3   :o   5
+                  :x  :x  :x ]
+                  (with-in-str "6\n2\n7\n4\n8" 
+                  (run [
+                         0  1  2
+                         3  4  5
+                         6  7  8 
+                        ]
+                        {:player-type :human :marker :x } 
+                        {:player-type :human :marker :o })))))))

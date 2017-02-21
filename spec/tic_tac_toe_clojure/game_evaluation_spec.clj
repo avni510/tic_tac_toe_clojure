@@ -24,7 +24,7 @@
 
   (describe "winning-marker"
     (context "won by row" 
-      (it "returns a string if the game is won by the first row all being the same marker"
+      (it "returns the marker if the game is won by the first row being the same value"
         (should= :x
                  (winning-marker
                   [ 
@@ -42,7 +42,7 @@
                     6  :o 8
                   ])))
 
-      (it "returns true if the game is won by the second row all being the same marker"
+      (it "returns the marker if the game is won by the second row being the same value"
         (should= :x 
                  (winning-marker 
                   [ 
@@ -51,7 +51,7 @@
                     6  :o  :o
                   ])))
 
-      (it "returns true if the game is won by the third row all being the same marker"
+      (it "returns the marker if the game is won by the third row being the same value"
         (should= :o
                  (winning-marker 
                   [ 
@@ -61,7 +61,7 @@
                   ]))))
 
     (context "won by column"
-      (it "returns true if the game is won by the first column all being the same value" 
+      (it "returns the marker if the game is won by the first column being the same value" 
         (should= :o
                  (winning-marker 
                   [ 
@@ -71,7 +71,7 @@
                   ])))
 
 
-      (it "returns true if the game is won by the second column all being the same value" 
+      (it "returns the marker if the game is won by the second column being the same value" 
         (should= :x
                  (winning-marker
                   [ 
@@ -80,7 +80,7 @@
                    :o  :x  8
                   ])))
 
-      (it "returns true if the game is won by the third column all being the same value" 
+      (it "returns the marker if the game is won by the third column being the same value" 
         (should= :o
                  (winning-marker 
                   [ 
@@ -99,7 +99,7 @@
                   ]))))
 
     (context "won by diagonal"
-      (it "returns true if the game is won by a diagonal all being the same value"
+      (it "returns the marker if the game is won by a diagonal being the same value"
         (should= :x
                  (winning-marker
                   [ 
@@ -117,7 +117,7 @@
                   ])))))
 
   (describe "game-over"
-    (it "returns true if the game is over"
+    (it "returns true if the game is tied"
       (should= true
                (game-over?
                 [ 
@@ -135,7 +135,7 @@
                  6   :x :x
                 ])))
 
-    (it "returns true if the game is won by the third column all being the same value" 
+    (it "returns true if the game is won" 
       (should= true
                (game-over? 
                 [ 

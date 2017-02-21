@@ -50,5 +50,21 @@
   (describe "blank-space"
     (it "displays a blank space"
       (should= " "
-               (blank-space)))))
+               (blank-space))))
+
+  (describe "invalid-player-type"
+    (it "displays a string stating the type of player does not exist"
+      (should= "This player type does not exist"
+               (invalid-player-type))))
+
+  (describe "computer-move"
+    (it "displays a string stating which space the computer moved to" 
+      (should= "The computer selected cell 6"
+               (computer-move 6))))
+          
+  (describe "computer-marker"
+    (it "displays a string stating what marker the computer is"
+      (should= "The computer is marker X"
+               (computer-marker :x)))))
+
 

@@ -14,7 +14,13 @@
       (with-out-str (it)))
 
     (it "displays a tied message if the game is tied"
-      (should= "The game ended in a tie" (game-over-message tied-board)))
+      (should= "The game ended in a tie" 
+               (game-over-message  
+                [
+                 :x  :o  :o
+                 :o  :x  :x
+                 :o  :x  :o ])))
+            
     
     (it "displays the winning marker X if the game is won by Player X"
       (should= "The game is won by the player with marker X"
