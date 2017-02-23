@@ -3,7 +3,7 @@
     [tic-tac-toe-clojure.validation-console-input :as validation-console-input]
     [tic-tac-toe-clojure.validation-rules :as validation-rules]))
 
-(defn execute-move [board move]
+(defn move [board move]
   (cond 
     (not (validation-console-input/is-num? move)) {:errors "This selection is invalid, please enter an integer between 0 and 8"}
     (validation-rules/invalid-cell? board (read-string move)) {:errors "This selection is invalid, please enter an integer between 0 and 8"}

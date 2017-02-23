@@ -1,5 +1,6 @@
 (ns tic-tac-toe-clojure.player-setup
-  (:require [clojure.string :as string]))
+  (:require [clojure.string :as string]
+            [tic-tac-toe-clojure.helpers :as helpers]))
 
 (def letters-in-alphabet
   26)
@@ -12,7 +13,7 @@
 
 (defn- generate-computer-marker []
   (-> 
-    (rand-int letters-in-alphabet) 
+    (helpers/random-number letters-in-alphabet) 
     (+ letter-a-ascii-value)
     (char)
     (str)

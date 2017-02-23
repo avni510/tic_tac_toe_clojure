@@ -1,5 +1,4 @@
-(ns tic-tac-toe-clojure.game-evaluation
-  (:require [tic-tac-toe-clojure.helpers :as helpers]))
+(ns tic-tac-toe-clojure.game-evaluation)
 
 (defn- won-by-rows [board]
   (let [[cell0 cell1 cell2 cell3 cell4 cell5 cell6 cell7 cell8] board]

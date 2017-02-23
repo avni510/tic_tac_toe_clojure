@@ -7,4 +7,5 @@
   :profiles {:dev {:dependencies [[speclj "3.3.1"]]}}
   :plugins [[speclj "3.3.1"]]
   :test-paths ["spec"]
-  :resource-paths ["src"])
+  :resource-paths ["src"]
+  :main tic-tac-toe-clojure.core)
