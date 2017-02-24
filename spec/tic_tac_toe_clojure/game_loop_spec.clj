@@ -12,11 +12,11 @@
 (def num-cells-in-board
   (count current-board))
 
-(def computer-moves (atom [2 4]))
+(def simple-computer-moves (atom [2 4]))
 
 (defn fake-move []
-  (let [next-move (first @computer-moves)
-        _ (swap! computer-moves rest)]
+  (let [next-move (first @simple-computer-moves)
+        _ (swap! simple-computer-moves rest)]
     next-move))
 
 (describe "Game Loop"
@@ -37,7 +37,7 @@
                              3  :x  :x
                             :o  7   :o ]
                            {:player-type :human :marker :x}
-                           {:player-type :computer :marker :o}))))))
+                           {:player-type :simple-computer :marker :o}))))))
 
     (context "the game is won by player x"
       (it "continues to ask the user for their move until the game is over"
@@ -53,4 +53,4 @@
                               6  7  8 
                              ]
                              {:player-type :human :marker :x} 
-                             {:player-type :computer :marker :o}))))))))
+                             {:player-type :simple-computer :marker :o}))))))))

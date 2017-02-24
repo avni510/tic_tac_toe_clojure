@@ -26,8 +26,8 @@
 
 (defn create-players [human-marker]
   (let [human-player-map (player-setup/create-human-player human-marker) 
-        computer-player-map (player-setup/create-computer-player human-marker)]
-    (console-ui/print-message (messages/computer-marker (:marker computer-player-map)))
+        simple-computer-player-map (player-setup/create-simple-computer-player human-marker)]
+    (console-ui/print-message (messages/computer-marker (:marker simple-computer-player-map)))
     (console-ui/print-message (messages/blank-space))
-    [human-player-map computer-player-map]))
+    [human-player-map simple-computer-player-map]))
 

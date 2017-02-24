@@ -21,5 +21,5 @@
     (it "returns a vector of two maps and the first value is the human player"
       (should= :human (:player-type (get (create-players :o) 0)))) 
 
-    (it "returns a vector of two maps and the second value is the computer player"
-      (should= :computer (:player-type (get (create-players :o) 1))))))
+    (it "returns a vector of two maps and the second value is the simple-computer player"
+      (should= :simple-computer (:player-type (get (create-players :o) 1))))))

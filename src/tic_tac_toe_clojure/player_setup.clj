@@ -26,6 +26,6 @@
       (recur computer-marker)
       opponent-marker)))
 
-(defn create-computer-player [human-marker]
-  (assoc {:player-type :computer} :marker (computer-marker human-marker)))
+(defn create-simple-computer-player [human-marker]
+  (assoc {:player-type :simple-computer} :marker (computer-marker human-marker)))
   

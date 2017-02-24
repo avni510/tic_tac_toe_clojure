@@ -35,21 +35,21 @@
     (human-select-move board player-map)
     (board/fill-board board (:marker player-map))))
 
-(defn- computer-move [board]
+(defn- simple-computer-move [board]
   (helpers/random-number (count board)))
 
-(defn- valid-move-loop-computer [move board]
+(defn- valid-move-loop-simple-computer [move board]
   (if (validation-rules/cell-occupied? board move)
-    (recur (computer-move board) board)
+    (recur (simple-computer-move board) board)
     move))
 
-(defmethod make-move :computer [board player-map] 
+(defmethod make-move :simple-computer [board player-map] 
   (console-ui/print-message (messages/player-turn (:marker player-map)))
   (console-ui/print-message (messages/blank-space))
-  (let [move (valid-move-loop-computer (computer-move board) board)
+  (let [move (valid-move-loop-simple-computer (simple-computer-move board) board)
         updated-board (board/fill-board move board (:marker player-map))]
     (console-ui/print-message (messages/board-string updated-board))
-    (console-ui/print-message (messages/computer-move move))
+    (console-ui/print-message (messages/simple-computer-move move))
     updated-board))
 
 (defmethod make-move :default [board player-map]

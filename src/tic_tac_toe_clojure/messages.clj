@@ -46,7 +46,7 @@
 (defn invalid-player-type []
   "This player type does not exist")
 
-(defn computer-move [cell]
+(defn simple-computer-move [cell]
   (str "The computer selected cell " cell))
 
 (defn computer-marker [marker]

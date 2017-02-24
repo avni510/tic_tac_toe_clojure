@@ -57,10 +57,10 @@
       (should= "This player type does not exist"
                (invalid-player-type))))
 
-  (describe "computer-move"
+  (describe "simple-computer-move"
     (it "displays a string stating which space the computer moved to" 
       (should= "The computer selected cell 6"
-               (computer-move 6))))
+               (simple-computer-move 6))))
           
   (describe "computer-marker"
     (it "displays a string stating what marker the computer is"

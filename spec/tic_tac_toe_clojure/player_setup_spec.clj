@@ -18,10 +18,10 @@
                  (with-in-str "O" (game-setup/select-marker))
                  (create-human-player)))))
 
-  (describe "create-computer-player"
+  (describe "create-simple-computer-player"
     (context "the human selects :o as their marker"
-      (it "creates a map for the computer player and the computer marker should not equal the human marker"
+      (it "creates a map for the simple-computer player and the computer marker should not equal the human marker"
        (with-redefs [helpers/random-number (fn [letters-in-alphabet] x-alpha-value)]
-         (should= {:player-type :computer :marker :x}
-                  (create-computer-player :o)))))))
+         (should= {:player-type :simple-computer :marker :x}
+                  (create-simple-computer-player :o)))))))
 
