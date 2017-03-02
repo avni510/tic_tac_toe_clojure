@@ -9,6 +9,7 @@
 (defn run [current-board current-player-map opponent-player-map]
   (if (game-evaluation/game-over? current-board)
     current-board
-    (recur (player-move/make-move current-board current-player-map) 
+    (recur (player-move/make-move {:board current-board 
+                                   :current-player-map current-player-map
+                                   :opponent-player-map opponent-player-map}) 
            opponent-player-map current-player-map)))
-
