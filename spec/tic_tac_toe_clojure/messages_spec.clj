@@ -65,6 +65,12 @@
   (describe "computer-marker"
     (it "displays a string stating what marker the computer is"
       (should= "The computer is marker X"
-               (computer-marker :x)))))
-
-
+               (computer-marker :x))))
+          
+  (describe "game-type-instructions"
+    (it "displays a string stating instructions to select a game type"
+      (should= "Please select which type of game you would like to play" (game-type-instructions))))
+          
+  (describe "game-menu-instructions"
+    (it "displays instructions to select an option from the menu"
+      (should= "Enter a number next to the choice" (game-menu-instructions)))))

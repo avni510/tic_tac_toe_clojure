@@ -8,7 +8,9 @@
 
 (defmulti make-move
   (fn [params] (let [player-type (:player-type (:current-player-map params))] 
-                    (player-type {:human :human :simple-computer :computer :hard-computer :computer}))))
+                    (player-type {:human :human 
+                                  :simple-computer :computer 
+                                  :hard-computer :computer}))))
                 
 (defn- invalid-move [errors-hash]
   (console-ui/print-message (:errors errors-hash))
@@ -28,24 +30,31 @@
     (valid-move-loop board)
     (read-string)))
 
+(defn- player-turn-message [marker]
+  (console-ui/print-message (messages/player-turn marker)))
+
+(defn- display-board [board]
+  (console-ui/print-message (messages/board-string board)))
+
 (defmethod make-move :human [params]
   (let [board (:board params)
-        player-map (:current-player-map params)]
-    (console-ui/print-message (messages/player-turn (:marker player-map)))
-    (console-ui/print-message (messages/board-string board))
+        player-map (:current-player-map params)
+        human-marker (:marker player-map)]
+    (player-turn-message human-marker)
+    (display-board board)
     (->
       (human-select-move board player-map)
-      (board/fill-board board (:marker player-map)))))
+      (board/fill-board board human-marker))))
 
 (defmethod make-move :computer [params] 
-  (println "hi there")
   (let [board (:board params)
-        player-map (:current-player-map params)]
-    (console-ui/print-message (messages/player-turn (:marker player-map)))
+        player-map (:current-player-map params)
+        computer-marker (:marker player-map)]
+    (player-turn-message computer-marker)
     (console-ui/print-message (messages/blank-space))
     (let [move (computer-move/ai-move params)
-          updated-board (board/fill-board move board (:marker player-map))]
-      (console-ui/print-message (messages/board-string updated-board))
+          updated-board (board/fill-board move board computer-marker)]
+      (display-board updated-board)
       (console-ui/print-message (messages/computer-move move))
       updated-board)))
 

@@ -27,5 +27,10 @@
       opponent-marker)))
 
 (defn create-simple-computer-player [human-marker]
-  (assoc {:player-type :simple-computer} :marker (computer-marker human-marker)))
+  (assoc {:player-type :simple-computer} 
+         :marker (computer-marker human-marker)))
+
+(defn create-hard-computer-player [human-marker]
+  (assoc {:player-type :hard-computer} 
+         :marker (computer-marker human-marker)))
   

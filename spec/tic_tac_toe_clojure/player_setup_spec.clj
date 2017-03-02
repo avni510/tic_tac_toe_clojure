@@ -21,7 +21,16 @@
   (describe "create-simple-computer-player"
     (context "the human selects :o as their marker"
       (it "creates a map for the simple-computer player and the computer marker should not equal the human marker"
-       (with-redefs [helpers/random-number (fn [letters-in-alphabet] x-alpha-value)]
-         (should= {:player-type :simple-computer :marker :x}
-                  (create-simple-computer-player :o)))))))
+        (with-redefs [helpers/random-number (fn [letters-in-alphabet] x-alpha-value)]
+          (should= {:player-type :simple-computer :marker :x}
+                   (create-simple-computer-player :o))))))
+          
+  (describe "create-hard-computer-player"
+    (context "the human selects :o as their marker"
+      (it "creates a map for the hard-computer player and the computer marker should not equal the human marker"
+        (with-redefs [helpers/random-number (fn [letters-in-alphabet] x-alpha-value)]
+          (should= {:player-type :hard-computer :marker :x}
+                   (create-hard-computer-player :o)))))))
+
+          
 

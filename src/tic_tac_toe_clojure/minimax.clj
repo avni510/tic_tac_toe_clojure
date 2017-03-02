@@ -37,7 +37,8 @@
     min
     max))
 
-(defn- optimal-score [sequence-boards computer-marker opponent-marker depth]
+(defn- optimal-score 
+  [sequence-boards computer-marker opponent-marker depth]
   (->>
       (map #(retrieve-score % computer-marker opponent-marker depth) 
            sequence-boards)
@@ -45,10 +46,11 @@
       
 (defn scores-map [board computer-marker opponent-marker]
   (map #(hash-map % 
-          (optimal-score (lazy-seq (vector (board/fill-board % board computer-marker))) 
-                         computer-marker 
-                         opponent-marker 
-                         1)) 
+          (optimal-score 
+            (lazy-seq (vector (board/fill-board % board computer-marker))) 
+            computer-marker 
+            opponent-marker 
+            1)) 
           (open-spaces board)))
 
 (defn best-move [move-score-map]

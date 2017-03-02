@@ -9,9 +9,6 @@
     3  4   :x
    :o  :o  8])
 
-(def num-cells-in-board
-  (count current-board))
-
 (describe "Player Move"
   (describe "make-move"
     (around [it]
@@ -37,8 +34,9 @@
           
     (context "the player type is invalid"
       (it "displays a message stating the player type is invalid"
-        (should= "This player type does not exist\n" (with-out-str (make-move {:board current-board 
-                                                                               :current-player-map {:player-type :person :marker :x}})))))
+        (should= "This player type does not exist\n" 
+                 (with-out-str (make-move {:board current-board 
+                                           :current-player-map {:player-type :person :marker :x}})))))
     
     (context "the player is a simple-computer"
       (it "generates a random move and returns a board"

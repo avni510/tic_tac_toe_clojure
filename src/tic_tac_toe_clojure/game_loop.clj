@@ -12,4 +12,4 @@
     (recur (player-move/make-move {:board current-board 
                                    :current-player-map current-player-map
                                    :opponent-player-map opponent-player-map}) 
-           opponent-player-map current-player-map)))
+            opponent-player-map current-player-map)))

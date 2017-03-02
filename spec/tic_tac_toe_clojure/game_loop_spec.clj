@@ -9,9 +9,6 @@
     3  4   :x
    :o  :o  8])
 
-(def num-cells-in-board
-  (count current-board))
-
 (def simple-computer-moves (atom [2 4]))
 
 (defn fake-move []

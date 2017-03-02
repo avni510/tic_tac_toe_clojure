@@ -7,9 +7,12 @@
     3   4  :x
     :o  :o :x])
 
+(def game-menu
+  {:1 "1. Human V. Simple Computer"
+   :2 "2. Human V. Hard Computer"})
+
 (describe "Validation"
   (describe "move"
-
     (it "returns an error string if the cell is taken"
       (should= {:errors "This cell is taken, please enter another move"}
                (move current-board "0")))
@@ -38,11 +41,21 @@
       (should= {:errors nil}
                (move current-board "2"))))
           
-  (describe "execute-marker"
+  (describe "marker"
     (it "returns an errors string if the input is not a valid character of the alphabet"
       (should= {:errors "This selection is invalid, please enter a marker between the characters A-Z"}
-               (execute-marker "*")))
+               (marker "*")))
 
     (it "returns nil if the input is a valid character of the alphabet"
       (should= {:errors nil}
-               (execute-marker "X")))))
+               (marker "X"))))
+  
+  (describe "game-type"
+    (it "returns an errors string if the input is not a valid game type"
+       (should= {:errors "Please enter a valid menu option"}
+                (game-type game-menu :z)))
+
+    (it "returns nil if the input is a input is a valid game type"
+      (should= {:errors nil}
+               (game-type game-menu :1)))))
+

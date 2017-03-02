@@ -51,4 +51,10 @@
 
 (defn computer-marker [marker]
   (str "The computer is marker " (string/upper-case (name marker))))
+
+(defn game-type-instructions []
+  "Please select which type of game you would like to play")
+
+(defn game-menu-instructions []
+  "Enter a number next to the choice")
   

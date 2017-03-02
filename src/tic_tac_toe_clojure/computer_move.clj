@@ -25,7 +25,8 @@
   (let [board (:board params)
         current-player-map (:current-player-map params)
         opponent-player-map (:opponent-player-map params)]
-    (-> (minimax/scores-map board (:marker current-player-map) (:marker opponent-player-map))
+    (-> (minimax/scores-map board (:marker current-player-map) 
+                                  (:marker opponent-player-map))
         (minimax/best-move))))
 
 
