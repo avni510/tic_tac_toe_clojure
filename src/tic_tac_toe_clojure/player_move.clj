@@ -7,7 +7,7 @@
 
 
 (defmulti make-move
-  (fn [params] (let [player-type (:player-type (:current-player-map params))] 
+  (fn [params] (let [player-type (:player-type (:current-player params))] 
                     (player-type {:human :human 
                                   :simple-computer :computer 
                                   :hard-computer :computer}))))
@@ -38,7 +38,7 @@
 
 (defmethod make-move :human [params]
   (let [board (:board params)
-        player-map (:current-player-map params)
+        player-map (:current-player params)
         human-marker (:marker player-map)]
     (player-turn-message human-marker)
     (display-board board)
@@ -48,7 +48,7 @@
 
 (defmethod make-move :computer [params] 
   (let [board (:board params)
-        player-map (:current-player-map params)
+        player-map (:current-player params)
         computer-marker (:marker player-map)]
     (player-turn-message computer-marker)
     (console-ui/print-message (messages/blank-space))

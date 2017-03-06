@@ -12,8 +12,8 @@
                                          :o :o :x
                                          :x 4 5 
                                          :x 7 :o] 
-                                :current-player-map {:player-type :simple-computer :marker :x}
-                                :opponent-player-map {:player-type :human :marker :o}})))))
+                                :current-player {:player-type :simple-computer :marker :x}
+                                :opponent-player {:player-type :human :marker :o}})))))
               
       (context "the player is a hard computer"
         (it "returns a move where the computer is most likely to win"
@@ -21,5 +21,5 @@
                                         :o :o :x
                                         :x 4 5 
                                         :x 7 :o]
-                               :current-player-map {:player-type :hard-computer :marker :x}
-                               :opponent-player-map {:player-type :human :marker :o}}))))))
+                               :current-player {:player-type :hard-computer :marker :x}
+                               :opponent-player {:player-type :human :marker :o}}))))))

@@ -6,10 +6,10 @@
             [tic-tac-toe-clojure.game-evaluation :as game-evaluation]
             [tic-tac-toe-clojure.player-move :as player-move]))
 
-(defn run [current-board current-player-map opponent-player-map]
+(defn run [current-board current-player opponent-player]
   (if (game-evaluation/game-over? current-board)
     current-board
     (recur (player-move/make-move {:board current-board 
-                                   :current-player-map current-player-map
-                                   :opponent-player-map opponent-player-map}) 
-            opponent-player-map current-player-map)))
+                                   :current-player current-player
+                                   :opponent-player opponent-player}) 
+            opponent-player current-player)))

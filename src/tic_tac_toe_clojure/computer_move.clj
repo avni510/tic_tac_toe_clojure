@@ -6,7 +6,7 @@
            ))
 
 (defmulti ai-move 
-  (fn [params] (:player-type (:current-player-map params))))
+  (fn [params] (:player-type (:current-player params))))
 
 (defn- simple-computer-move [board]
   (helpers/random-number (board/open-spaces board)))
@@ -18,10 +18,10 @@
 
 (defmethod ai-move :hard-computer [params]
   (let [board (:board params)
-        current-player-map (:current-player-map params)
-        opponent-player-map (:opponent-player-map params)]
-    (-> (minimax/scores-map board (:marker current-player-map) 
-                                  (:marker opponent-player-map))
+        current-player (:current-player params)
+        opponent-player (:opponent-player params)]
+    (-> (minimax/scores-map board (:marker current-player) 
+                                  (:marker opponent-player))
         (minimax/best-move))))
 
 

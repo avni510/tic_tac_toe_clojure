@@ -37,11 +37,11 @@
      (player-setup/create-hard-computer-player human-marker)]))
 
 (defn game-players [game-type human-marker]
-  (let [[human-player-map computer-player-map] 
+  (let [[human-player computer-player] 
         (determine-players game-type human-marker)]
-    (computer-marker-message computer-player-map)
+    (computer-marker-message computer-player)
     (console-ui/print-message (messages/blank-space))
-    [human-player-map computer-player-map]))
+    [human-player computer-player]))
 
 
 
