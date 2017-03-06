@@ -2,24 +2,19 @@
  (:require [tic-tac-toe-clojure.validation-rules :as validation-rules]
            [tic-tac-toe-clojure.helpers :as helpers]
            [tic-tac-toe-clojure.minimax :as minimax]
+           [tic-tac-toe-clojure.board :as board]
            ))
 
 (defmulti ai-move 
   (fn [params] (:player-type (:current-player-map params))))
 
 (defn- simple-computer-move [board]
-  (helpers/random-number (count board)))
-
-(defn- valid-move-loop-simple-computer [move board]
-  (if (validation-rules/cell-occupied? board move)
-    (recur (simple-computer-move board) board)
-    move))
+  (helpers/random-number (board/open-spaces board)))
 
 (defmethod ai-move :simple-computer [params]
   (let [board (:board params)]
     (->
-        (simple-computer-move board)
-        (valid-move-loop-simple-computer board))))
+        (simple-computer-move board))))
 
 (defmethod ai-move :hard-computer [params]
   (let [board (:board params)

@@ -40,5 +40,11 @@
                   3   4  :x
                   :o  :o  8
                  ]  
-                 :o)))))
+                 :o))))
 
+  (describe "open-spaces"
+    (it "returns a lazy sequence of all the open spaces on the board"
+       (should= '(0 2 3 4 5 6 7 8) (open-spaces [ 
+                                                  0 :x 2
+                                                  3  4 5
+                                                  6  7 8])))))

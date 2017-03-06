@@ -40,7 +40,7 @@
     
     (context "the player is a simple-computer"
       (it "generates a random move and returns a board"
-        (with-redefs [helpers/random-number (fn [num-cells-in-board] 4)]
+        (with-redefs [helpers/random-number (fn [open-spaces-sequence] 4)]
           (should= [
                     :x  1   2
                      3  :o  :x         

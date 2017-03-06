@@ -3,9 +3,6 @@
             [tic-tac-toe-clojure.console-runner :refer :all]
             [tic-tac-toe-clojure.helpers :as helpers]))
 
-(def num-cells-in-board
-  (count empty-board))
-
 (def o-letter-alphabet-value
   15)
 
@@ -20,7 +17,7 @@
   (describe "run"
     (it "runs the game"
       (let [game (with-out-str 
-                   (with-redefs [helpers/random-number (fn [num-cells-in-board] (fake-value))]
+                   (with-redefs [helpers/random-number (fn [random-sequence-values] (fake-value))]
                      (with-in-str "1\nx\n0\n1\n2" (run))))
             messages (clojure.string/split game #"\n")]
         (should= "The game is won by the player with marker X" (last messages))))))

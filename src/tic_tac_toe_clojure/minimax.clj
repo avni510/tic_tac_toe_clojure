@@ -2,9 +2,6 @@
   (:require [tic-tac-toe-clojure.game-evaluation :as game-evaluation]
             [tic-tac-toe-clojure.board :as board]))
 
-(defn- open-spaces [board]
-  (filter number? board))
-
 (defn- determine-player-marker [depth computer-marker opponent-marker]
   (if (zero? (mod depth 2))
    computer-marker
@@ -20,7 +17,7 @@
 
 (defn- generate-boards [current-player-marker board]
   (map #(board/fill-board % board current-player-marker) 
-       (open-spaces board)))
+       (board/open-spaces board)))
 
 (declare optimal-score)
 
@@ -51,7 +48,7 @@
             computer-marker 
             opponent-marker 
             1)) 
-          (open-spaces board)))
+          (board/open-spaces board)))
 
 (defn best-move [move-score-map]
   (->> move-score-map

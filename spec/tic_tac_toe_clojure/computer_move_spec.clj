@@ -7,7 +7,7 @@
     (describe "ai-move"
       (context "the player is a simple computer"
         (it "returns a random move"
-          (with-redefs [helpers/random-number (fn [num-cells-in-board] 4)]
+          (with-redefs [helpers/random-number (fn [open-spaces-sequence] 4)]
             (should= 4 (ai-move {:board [                                              
                                          :o :o :x
                                          :x 4 5 

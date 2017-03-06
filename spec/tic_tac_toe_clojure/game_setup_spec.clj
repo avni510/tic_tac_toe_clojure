@@ -24,13 +24,13 @@
   (describe "game-players"
     (context "the user selects game type of Human V. Simple Computer"
       (it "returns a vector of two maps and the first value is the first player"
-        (with-redefs [helpers/random-number (fn [letters-in-alphabet] x-alpha-value)]
+        (with-redefs [helpers/random-number (fn [letters-in-alphabet-sequence] x-alpha-value)]
           (should= [{:player-type :human :marker :o} {:player-type :simple-computer :marker :x}] 
                    (game-players :human-v-simple-computer :o)))))
 
     (context "the user selects game type of Human V. Hard Computer"
       (it "returns a vector of two maps and the first value is the first player"
-        (with-redefs [helpers/random-number (fn [letters-in-alphabet] x-alpha-value)]
+        (with-redefs [helpers/random-number (fn [letters-in-alphabet-sequence] x-alpha-value)]
           (should= [{:player-type :human :marker :o} {:player-type :hard-computer :marker :x}] 
                    (game-players :human-v-hard-computer :o)))))))
 

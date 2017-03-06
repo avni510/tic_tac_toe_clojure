@@ -23,7 +23,7 @@
 
     (context "the game ends in a tie"
       (it "continues to ask the user for their move until the game is over"
-        (with-redefs [helpers/random-number (fn [num-cells-in-board] 3)]
+        (with-redefs [helpers/random-number (fn [open-spaces-sequence] 3)]
           (should= [             
                      :x  :o  :o
                      :o  :x  :x
@@ -38,7 +38,7 @@
 
     (context "the game is won by player x"
       (it "continues to ask the user for their move until the game is over"
-        (with-redefs [helpers/random-number (fn [num-cells-in-board] (fake-move))]
+        (with-redefs [helpers/random-number (fn [open-spaces-sequence] (fake-move))]
            (should= [             
                      0    1  :o
                      3   :o   5

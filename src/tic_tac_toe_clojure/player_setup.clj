@@ -13,7 +13,7 @@
 
 (defn- generate-computer-marker []
   (-> 
-    (helpers/random-number letters-in-alphabet) 
+    (helpers/random-number (range letters-in-alphabet))
     (+ letter-a-ascii-value)
     (char)
     (str)
