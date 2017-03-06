@@ -16,7 +16,7 @@
     0)))
 
 (defn- generate-boards [current-player-marker board]
-  (map #(board/fill-board % board current-player-marker) 
+  (map #(board/fill-board % board current-player-marker)
        (board/open-spaces board)))
 
 (declare optimal-score)
@@ -24,9 +24,9 @@
 (defn- retrieve-score [board computer-marker opponent-marker depth]
   (if (game-evaluation/game-over? board)
     (calculate-score board computer-marker opponent-marker depth)
-    (-> 
+    (->
        (determine-player-marker depth computer-marker opponent-marker)
-       (generate-boards board) 
+       (generate-boards board)
        (optimal-score computer-marker opponent-marker (inc depth)))))
 
 (defn- min-or-max [depth]
@@ -34,20 +34,20 @@
     min
     max))
 
-(defn- optimal-score 
+(defn- optimal-score
   [sequence-boards computer-marker opponent-marker depth]
   (->>
-      (map #(retrieve-score % computer-marker opponent-marker depth) 
+      (map #(retrieve-score % computer-marker opponent-marker depth)
            sequence-boards)
       (apply (min-or-max depth))))
-      
+
 (defn scores-map [board computer-marker opponent-marker]
-  (map #(hash-map % 
-          (optimal-score 
-            (lazy-seq (vector (board/fill-board % board computer-marker))) 
-            computer-marker 
-            opponent-marker 
-            1)) 
+  (map #(hash-map %
+          (optimal-score
+            (lazy-seq (vector (board/fill-board % board computer-marker)))
+            computer-marker
+            opponent-marker
+            1))
           (board/open-spaces board)))
 
 (defn best-move [move-score-map]
@@ -55,6 +55,3 @@
        (apply merge)
        (apply max-key val)
        (key)))
-
-
-

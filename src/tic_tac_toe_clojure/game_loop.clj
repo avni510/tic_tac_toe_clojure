@@ -9,7 +9,7 @@
 (defn run [current-board current-player opponent-player]
   (if (game-evaluation/game-over? current-board)
     current-board
-    (recur (player-move/make-move {:board current-board 
+    (recur (player-move/make-move {:board current-board
                                    :current-player current-player
-                                   :opponent-player opponent-player}) 
+                                   :opponent-player opponent-player})
             opponent-player current-player)))

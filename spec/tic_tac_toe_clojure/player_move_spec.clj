@@ -20,43 +20,43 @@
                   :x  1   2
                    3  4   :x
                   :o  :o  :x]
-                 (with-in-str "8" (make-move {:board current-board 
+                 (with-in-str "8" (make-move {:board current-board
                                               :current-player {:player-type :human :marker :x}})))))
 
       (context "the user enters an invalid move"
         (it "continues to prompts the user to enter another move"
-          (should= [            
+          (should= [
                     :x  1   2
                      3  4   :x
                     :o  :o  :o]
-                   (with-in-str "8\n#\n    \nfive\n4.35" (make-move {:board current-board 
+                   (with-in-str "8\n#\n    \nfive\n4.35" (make-move {:board current-board
                                                                      :current-player {:player-type :human :marker :o}})))))
-          
+
     (context "the player type is invalid"
       (it "displays a message stating the player type is invalid"
-        (should= "This player type does not exist\n" 
-                 (with-out-str (make-move {:board current-board 
+        (should= "This player type does not exist\n"
+                 (with-out-str (make-move {:board current-board
                                            :current-player {:player-type :person :marker :x}})))))
-    
+
     (context "the player is a simple-computer"
       (it "generates a random move and returns a board"
         (with-redefs [helpers/random-number (fn [open-spaces-sequence] 4)]
           (should= [
                     :x  1   2
-                     3  :o  :x         
+                     3  :o  :x
                     :o  :o  8]
-                   (make-move {:board current-board 
+                   (make-move {:board current-board
                                :current-player {:player-type :simple-computer :marker :o}})))))
-            
+
     (context "the player is a hard computer"
       (it "generates the move that is most likely to win and returns a board"
         (should=[
                  :o :o :x
-                 :x :x 5 
+                 :x :x 5
                  :x 7 :o]
                 (make-move {:board [
                                     :o :o :x
-                                    :x 4 5 
-                                    :x 7 :o] 
-                           :current-player {:player-type :hard-computer :marker :x} 
+                                    :x 4 5
+                                    :x 7 :o]
+                           :current-player {:player-type :hard-computer :marker :x}
                            :opponent-player {:player-type :human :marker :o}}))))))

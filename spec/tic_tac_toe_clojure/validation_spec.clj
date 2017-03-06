@@ -18,7 +18,7 @@
                (move current-board "0")))
 
     (it "returns nil if the cell is open"
-      (should= {:errors nil} 
+      (should= {:errors nil}
                (move current-board "4")))
 
     (it "returns an error string if the input for a move is a string"
@@ -40,7 +40,7 @@
     (it "returns nil if the input is a number between 0 to 8"
       (should= {:errors nil}
                (move current-board "2"))))
-          
+
   (describe "marker"
     (it "returns an errors string if the input is not a valid character of the alphabet"
       (should= {:errors "This selection is invalid, please enter a marker between the characters A-Z"}
@@ -49,7 +49,7 @@
     (it "returns nil if the input is a valid character of the alphabet"
       (should= {:errors nil}
                (marker "X"))))
-  
+
   (describe "game-type"
     (it "returns an errors string if the input is not a valid game type"
        (should= {:errors "Please enter a valid menu option"}
@@ -58,4 +58,3 @@
     (it "returns nil if the input is a input is a valid game type"
       (should= {:errors nil}
                (game-type game-menu :1)))))
-

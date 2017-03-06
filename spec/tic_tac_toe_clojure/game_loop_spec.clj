@@ -24,12 +24,12 @@
     (context "the game ends in a tie"
       (it "continues to ask the user for their move until the game is over"
         (with-redefs [helpers/random-number (fn [open-spaces-sequence] 3)]
-          (should= [             
+          (should= [
                      :x  :o  :o
                      :o  :x  :x
                      :o  :x  :o ]
-                    (with-in-str "7" 
-                      (run [ 
+                    (with-in-str "7"
+                      (run [
                             :x  :o  :o
                              3  :x  :x
                             :o  7   :o ]
@@ -39,15 +39,15 @@
     (context "the game is won by player x"
       (it "continues to ask the user for their move until the game is over"
         (with-redefs [helpers/random-number (fn [open-spaces-sequence] (fake-move))]
-           (should= [             
+           (should= [
                      0    1  :o
                      3   :o   5
                      :x  :x  :x ]
-                     (with-in-str "6\n7\n8" 
+                     (with-in-str "6\n7\n8"
                        (run [
                               0  1  2
                               3  4  5
-                              6  7  8 
+                              6  7  8
                              ]
-                             {:player-type :human :marker :x} 
+                             {:player-type :human :marker :x}
                              {:player-type :simple-computer :marker :o}))))))))

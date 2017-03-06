@@ -12,7 +12,6 @@
 
     (it "returns false if the user enters a blank space"
       (should= false (is-num? "")))
-          
+
     (it "returns false if the user enters a special character"
       (should= false (is-num? ",")))))
-          

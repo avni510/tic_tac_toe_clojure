@@ -6,8 +6,6 @@
 (defn game-over-message [board]
   (console-ui/print-message (messages/board-string board))
   (let [winning-marker (game-evaluation/winning-marker board)]
-    (if winning-marker 
-      (messages/won-game winning-marker) 
+    (if winning-marker
+      (messages/won-game winning-marker)
       (messages/tied-game))))
-
-

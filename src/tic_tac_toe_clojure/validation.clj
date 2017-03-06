@@ -1,11 +1,11 @@
 (ns tic-tac-toe-clojure.validation
-  (:require 
+  (:require
     [tic-tac-toe-clojure.validation-console-input :as validation-console-input]
     [tic-tac-toe-clojure.validation-rules :as validation-rules]
     [tic-tac-toe-clojure.validation-game-type :as validation-game-type]))
 
 (defn move [board move]
-  (cond 
+  (cond
     (not (validation-console-input/is-num? move)) {:errors "This selection is invalid, please enter an integer between 0 and 8"}
     (validation-rules/invalid-cell? board (read-string move)) {:errors "This selection is invalid, please enter an integer between 0 and 8"}
     (validation-rules/cell-occupied? board (read-string move)) {:errors "This cell is taken, please enter another move"}

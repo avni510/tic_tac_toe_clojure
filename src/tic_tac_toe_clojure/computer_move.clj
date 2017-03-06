@@ -5,7 +5,7 @@
            [tic-tac-toe-clojure.board :as board]
            ))
 
-(defmulti ai-move 
+(defmulti ai-move
   (fn [params] (:player-type (:current-player params))))
 
 (defn- simple-computer-move [board]
@@ -20,8 +20,6 @@
   (let [board (:board params)
         current-player (:current-player params)
         opponent-player (:opponent-player params)]
-    (-> (minimax/scores-map board (:marker current-player) 
+    (-> (minimax/scores-map board (:marker current-player)
                                   (:marker opponent-player))
         (minimax/best-move))))
-
-

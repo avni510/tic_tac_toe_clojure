@@ -25,16 +25,16 @@
     (string/upper-case (name cell))))
 
 (defn board-string [board]
-  (str " "(convert-to-string (nth board 0)) " | " 
-       (convert-to-string (nth board 1)) " | " 
+  (str " "(convert-to-string (nth board 0)) " | "
+       (convert-to-string (nth board 1)) " | "
        (convert-to-string (nth board 2))
-       "\n===+===+===\n " 
-       (convert-to-string (nth board 3)) " | " 
-       (convert-to-string (nth board 4)) " | " 
-       (convert-to-string (nth board 5)) 
-       "\n===+===+===\n " 
-       (convert-to-string (nth board 6)) " | " 
-       (convert-to-string (nth board 7)) " | " 
+       "\n===+===+===\n "
+       (convert-to-string (nth board 3)) " | "
+       (convert-to-string (nth board 4)) " | "
+       (convert-to-string (nth board 5))
+       "\n===+===+===\n "
+       (convert-to-string (nth board 6)) " | "
+       (convert-to-string (nth board 7)) " | "
        (convert-to-string (nth board 8)) "\n"))
 
 (defn game-instructions  []
@@ -57,4 +57,3 @@
 
 (defn game-menu-instructions []
   "Enter a number next to the choice")
-  

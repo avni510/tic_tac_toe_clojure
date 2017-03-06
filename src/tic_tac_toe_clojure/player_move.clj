@@ -1,5 +1,5 @@
 (ns tic-tac-toe-clojure.player-move
- (:require [tic-tac-toe-clojure.messages :as messages]      
+ (:require [tic-tac-toe-clojure.messages :as messages]
            [tic-tac-toe-clojure.console-ui :as console-ui]
            [tic-tac-toe-clojure.validation :as validation]
            [tic-tac-toe-clojure.board :as board]
@@ -7,11 +7,11 @@
 
 
 (defmulti make-move
-  (fn [params] (let [player-type (:player-type (:current-player params))] 
-                    (player-type {:human :human 
-                                  :simple-computer :computer 
+  (fn [params] (let [player-type (:player-type (:current-player params))]
+                    (player-type {:human :human
+                                  :simple-computer :computer
                                   :hard-computer :computer}))))
-                
+
 (defn- invalid-move [errors-hash]
   (console-ui/print-message (:errors errors-hash))
   (console-ui/get-user-input))
@@ -25,7 +25,7 @@
 (defn- human-select-move [board player-map]
   (console-ui/print-message (messages/player-move))
   (console-ui/print-message (messages/blank-space))
-  (-> 
+  (->
     (console-ui/get-user-input)
     (valid-move-loop board)
     (read-string)))
@@ -46,7 +46,7 @@
       (human-select-move board player-map)
       (board/fill-board board human-marker))))
 
-(defmethod make-move :computer [params] 
+(defmethod make-move :computer [params]
   (let [board (:board params)
         player-map (:current-player params)
         computer-marker (:marker player-map)]

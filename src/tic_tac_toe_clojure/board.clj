@@ -11,4 +11,3 @@
 
 (defn open-spaces [board]
   (filter #(is-open? %) board))
-
