@@ -19,9 +19,9 @@
 (defn run []
   (let [game-type (game-selection/run game-menu)
         human-marker (game-setup/select-marker)
-        [human-player-map computer-player-map] (game-setup/game-players
+        [human-player computer-player] (game-setup/game-players
                                                  game-type
                                                  human-marker)]
-    (-> (game-loop/run empty-board human-player-map computer-player-map)
+    (-> (game-loop/run empty-board human-player computer-player)
         (game-completion/game-over-message)
         (console-ui/print-message))))
