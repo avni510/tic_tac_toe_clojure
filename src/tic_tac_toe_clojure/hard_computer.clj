@@ -1,6 +1,7 @@
-(ns tic-tac-toe-clojure.minimax
+(ns tic-tac-toe-clojure.hard-computer
   (:require [tic-tac-toe-clojure.game-evaluation :as game-evaluation]
-            [tic-tac-toe-clojure.board :as board]))
+            [tic-tac-toe-clojure.board :as board]
+            [tic-tac-toe-clojure.computer-move :refer [ai-move]]))
 
 (defn- determine-player-marker [depth computer-marker opponent-marker]
   (if (zero? (mod depth 2))
@@ -41,7 +42,7 @@
            sequence-boards)
       (apply (min-or-max depth))))
 
-(defn scores-map [board computer-marker opponent-marker]
+(defn- scores-map [board computer-marker opponent-marker]
   (map #(hash-map %
           (optimal-score
             (lazy-seq (vector (board/fill-board % board computer-marker)))
@@ -50,8 +51,16 @@
             1))
           (board/open-spaces board)))
 
-(defn best-move [move-score-map]
+(defn- best-move [move-score-map]
   (->> move-score-map
        (apply merge)
        (apply max-key val)
        (key)))
+
+(defmethod ai-move :hard-computer [params]
+  (let [board (:board params)
+        current-player (:current-player params)
+        opponent-player (:opponent-player params)]
+    (-> (scores-map board (:marker current-player)
+                                  (:marker opponent-player))
+        (best-move))))
