@@ -1,5 +1,5 @@
-(ns tic-tac-toe-clojure.simple-computer
-  (:require [tic-tac-toe-clojure.computer-move :refer [ai-move]]
+(ns tic-tac-toe-clojure.player.computer-move.simple-computer
+  (:require [tic-tac-toe-clojure.player.computer-move :refer [ai-move]]
             [tic-tac-toe-clojure.helpers :as helpers]
             [tic-tac-toe-clojure.board :as board]))
 

@@ -1,7 +1,7 @@
-(ns tic-tac-toe-clojure.computer
+(ns tic-tac-toe-clojure.player.computer
   (:require [tic-tac-toe-clojure.player :refer [play-turn]]
             [tic-tac-toe-clojure.messages :as messages]
-            [tic-tac-toe-clojure.computer-move :as computer-move]
+            [tic-tac-toe-clojure.player.computer-move :as computer-move]
             [tic-tac-toe-clojure.console-ui :as console-ui]
             [tic-tac-toe-clojure.board :as board]))
 

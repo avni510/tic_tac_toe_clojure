@@ -1,7 +1,7 @@
-(ns tic-tac-toe-clojure.hard-computer
+(ns tic-tac-toe-clojure.player.computer-move.hard-computer
   (:require [tic-tac-toe-clojure.game-evaluation :as game-evaluation]
             [tic-tac-toe-clojure.board :as board]
-            [tic-tac-toe-clojure.computer-move :refer [ai-move]]))
+            [tic-tac-toe-clojure.player.computer-move :refer [ai-move]]))
 
 (defn- determine-player-marker [depth computer-marker opponent-marker]
   (if (zero? (mod depth 2))

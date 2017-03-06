@@ -1,7 +1,7 @@
-(ns tic-tac-toe-clojure.human-spec
+(ns tic-tac-toe-clojure.player.human-spec
   (:require [speclj.core :refer :all]
             [tic-tac-toe-clojure.player :refer [play-turn]]
-            [tic-tac-toe-clojure.human :refer :all]))
+            [tic-tac-toe-clojure.player.human :refer :all]))
 
 (def current-board
   [

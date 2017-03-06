@@ -1,6 +1,6 @@
-(ns tic-tac-toe-clojure.validation-game-type-spec
+(ns tic-tac-toe-clojure.validation.game-type-spec
   (:require [speclj.core :refer :all]
-            [tic-tac-toe-clojure.validation-game-type :refer :all]))
+            [tic-tac-toe-clojure.validation.game-type :refer :all]))
 
 (def game-menu
   {:1 "1. Human V. Simple Computer"

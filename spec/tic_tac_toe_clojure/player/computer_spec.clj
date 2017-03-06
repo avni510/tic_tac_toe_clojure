@@ -1,8 +1,8 @@
-(ns tic-tac-toe-clojure.computer-spec
+(ns tic-tac-toe-clojure.player.computer-spec
   (:require [speclj.core :refer :all]
             [tic-tac-toe-clojure.player :refer [play-turn]]
             [tic-tac-toe-clojure.helpers :as helpers]
-            [tic-tac-toe-clojure.computer :refer :all]))
+            [tic-tac-toe-clojure.player.computer :refer :all]))
 
 (describe "Computer"
   (describe "play-turn"

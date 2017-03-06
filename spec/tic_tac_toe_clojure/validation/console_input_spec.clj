@@ -1,6 +1,6 @@
-(ns tic-tac-toe-clojure.validation-console-input-spec
+(ns tic-tac-toe-clojure.validation.console-input-spec
   (:require [speclj.core :refer :all]
-            [tic-tac-toe-clojure.validation-console-input :refer :all]))
+            [tic-tac-toe-clojure.validation.console-input :refer :all]))
 
 (describe "Validation Console Input"
   (describe "is-num?"

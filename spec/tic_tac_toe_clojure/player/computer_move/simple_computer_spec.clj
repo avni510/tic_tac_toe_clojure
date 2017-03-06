@@ -1,8 +1,8 @@
-(ns tic-tac-toe-clojure.simple-computer-spec
+(ns tic-tac-toe-clojure.player.computer-move.simple-computer-spec
   (:require [speclj.core :refer :all]
-            [tic-tac-toe-clojure.simple-computer :refer :all]
+            [tic-tac-toe-clojure.player.computer-move.simple-computer :refer :all]
             [tic-tac-toe-clojure.helpers :as helpers]
-            [tic-tac-toe-clojure.computer-move :refer [ai-move]]))
+            [tic-tac-toe-clojure.player.computer-move :refer [ai-move]]))
 
 (describe "Simple Computer"
     (describe "ai-move"

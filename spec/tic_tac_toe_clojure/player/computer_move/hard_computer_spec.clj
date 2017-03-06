@@ -1,7 +1,7 @@
-(ns tic-tac-toe-clojure.hard-computer-spec
+(ns tic-tac-toe-clojure.player.computer-move.hard-computer-spec
   (:require [speclj.core :refer :all]
-            [tic-tac-toe-clojure.computer-move :refer [ai-move]]
-            [tic-tac-toe-clojure.hard-computer :refer :all]))
+            [tic-tac-toe-clojure.player.computer-move :refer [ai-move]]
+            [tic-tac-toe-clojure.player.computer-move.hard-computer :refer :all]))
 
 (describe "Hard Computer"
   (describe "ai-move"

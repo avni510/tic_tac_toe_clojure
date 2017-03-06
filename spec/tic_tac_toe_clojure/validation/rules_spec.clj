@@ -1,6 +1,6 @@
-(ns tic-tac-toe-clojure.validation-rules-spec
+(ns tic-tac-toe-clojure.validation.rules-spec
   (:require [speclj.core :refer :all]
-            [tic-tac-toe-clojure.validation-rules :refer :all]))
+            [tic-tac-toe-clojure.validation.rules :refer :all]))
 
 (def current-board
    [:x  1   2

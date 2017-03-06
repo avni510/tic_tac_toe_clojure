@@ -1,4 +1,4 @@
-(ns tic-tac-toe-clojure.human
+(ns tic-tac-toe-clojure.player.human
   (:require [tic-tac-toe-clojure.player :refer [play-turn]]
             [tic-tac-toe-clojure.messages :as messages]
             [tic-tac-toe-clojure.console-ui :as console-ui]
@@ -15,7 +15,7 @@
       (recur (invalid-move errors-hash) board)
       move)))
 
-(defn- human-select-move [board player-map]
+(defn- select-move [board player-map]
   (console-ui/print-message (messages/player-move))
   (console-ui/print-message (messages/blank-space))
   (->
@@ -30,5 +30,5 @@
     (console-ui/print-message (messages/player-turn human-marker))
     (console-ui/print-message (messages/board-string board))
     (->
-      (human-select-move board player-map)
+      (select-move board player-map)
       (board/fill-board board human-marker))))
