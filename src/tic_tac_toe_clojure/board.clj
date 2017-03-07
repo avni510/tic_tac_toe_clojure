@@ -6,3 +6,8 @@
 (defn fill-board [index board marker]
     (assoc board index marker))
 
+(defn- is-open? [space]
+  (number? space))
+
+(defn open-spaces [board]
+  (filter #(is-open? %) board))

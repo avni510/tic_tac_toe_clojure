@@ -2,8 +2,8 @@
 
 (defn- won-by-rows [board]
   (let [[cell0 cell1 cell2 cell3 cell4 cell5 cell6 cell7 cell8] board]
-    (cond 
-      (= cell0 cell1 cell2) cell0 
+    (cond
+      (= cell0 cell1 cell2) cell0
       (= cell3 cell4 cell5) cell3
       (= cell6 cell7 cell8) cell6
       :else nil)))
@@ -27,12 +27,10 @@
   (not-any? number? current-board))
 
 (defn winning-marker [current-board]
-  (or (won-by-rows current-board) 
-      (won-by-columns current-board) 
+  (or (won-by-rows current-board)
+      (won-by-columns current-board)
       (won-by-diagonals current-board)))
 
 (defn game-over? [current-board]
-  (or (tied? current-board) 
+  (or (tied? current-board)
       (boolean (winning-marker current-board))))
-
-

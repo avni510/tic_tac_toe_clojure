@@ -12,8 +12,8 @@
   (assoc {:player-type :human} :marker human-marker))
 
 (defn- generate-computer-marker []
-  (-> 
-    (helpers/random-number letters-in-alphabet) 
+  (->
+    (helpers/random-number (range letters-in-alphabet))
     (+ letter-a-ascii-value)
     (char)
     (str)
@@ -26,6 +26,10 @@
       (recur computer-marker)
       opponent-marker)))
 
-(defn create-computer-player [human-marker]
-  (assoc {:player-type :computer} :marker (computer-marker human-marker)))
-  
+(defn create-simple-computer-player [human-marker]
+  (assoc {:player-type :simple-computer}
+         :marker (computer-marker human-marker)))
+
+(defn create-hard-computer-player [human-marker]
+  (assoc {:player-type :hard-computer}
+         :marker (computer-marker human-marker)))

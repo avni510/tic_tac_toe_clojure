@@ -9,14 +9,11 @@
     3  4   :x
    :o  :o  8])
 
-(def num-cells-in-board
-  (count current-board))
-
-(def computer-moves (atom [2 4]))
+(def simple-computer-moves (atom [2 4]))
 
 (defn fake-move []
-  (let [next-move (first @computer-moves)
-        _ (swap! computer-moves rest)]
+  (let [next-move (first @simple-computer-moves)
+        _ (swap! simple-computer-moves rest)]
     next-move))
 
 (describe "Game Loop"
@@ -26,31 +23,31 @@
 
     (context "the game ends in a tie"
       (it "continues to ask the user for their move until the game is over"
-        (with-redefs [helpers/random-number (fn [num-cells-in-board] 3)]
-          (should= [             
+        (with-redefs [helpers/random-number (fn [open-spaces-sequence] 3)]
+          (should= [
                      :x  :o  :o
                      :o  :x  :x
                      :o  :x  :o ]
-                    (with-in-str "7" 
-                      (run [ 
+                    (with-in-str "7"
+                      (run [
                             :x  :o  :o
                              3  :x  :x
                             :o  7   :o ]
                            {:player-type :human :marker :x}
-                           {:player-type :computer :marker :o}))))))
+                           {:player-type :simple-computer :marker :o}))))))
 
     (context "the game is won by player x"
       (it "continues to ask the user for their move until the game is over"
-        (with-redefs [helpers/random-number (fn [num-cells-in-board] (fake-move))]
-           (should= [             
+        (with-redefs [helpers/random-number (fn [open-spaces-sequence] (fake-move))]
+           (should= [
                      0    1  :o
                      3   :o   5
                      :x  :x  :x ]
-                     (with-in-str "6\n7\n8" 
+                     (with-in-str "6\n7\n8"
                        (run [
                               0  1  2
                               3  4  5
-                              6  7  8 
+                              6  7  8
                              ]
-                             {:player-type :human :marker :x} 
-                             {:player-type :computer :marker :o}))))))))
+                             {:player-type :human :marker :x}
+                             {:player-type :simple-computer :marker :o}))))))))
