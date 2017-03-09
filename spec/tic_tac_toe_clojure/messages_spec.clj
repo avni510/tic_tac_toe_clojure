@@ -29,18 +29,28 @@
       (should= "Please pick either 'X' or 'O' for your marker"
                (pick-marker :x :o))))
 
-  (describe "valid-marker"
+ (describe "valid-marker"
     (it "returns a string stating for the user to pick a valid marker"
       (should= "Please enter a valid marker"
                (valid-marker))))
 
   (describe "board-string"
-    (it "displays the board as a string"
-      (should=" 0 | X | O\n===+===+===\n 3 | O | X\n===+===+===\n O | X | O\n"
-               (board-string
-                [ 0  :x  :o
-                  3  :o  :x
-                  :o  :x  :o]))))
+    (context "it is a 3X3 board"
+      (it "displays the board as a string"
+        (should= "  0 |  X |  O \n====+====+====\n  3 |  4 |  5 \n====+====+====\n  6 |  7 |  8 "
+                 (board-string
+                  [ 0  :x  :o
+                    3  4  5
+                    6  7  8]))))
+
+    (context "it is a 4X4 board"
+      (it "displays the board as a string"
+        (should="  0 |  X |  O |  3 \n====+====+====+====\n  4 |  X |  6 |  7 \n====+====+====+====\n  8 |  9 |  X |  O \n====+====+====+====\n  X | 13 | 14 | 15 "
+                (board-string
+                 [ 0  :x  :o 3
+                   4  :x  6 7
+                   8  9  :x :o
+                   :x 13  14 15 ])))))
 
   (describe "game-instructions"
     (it "displays instructions for the game"

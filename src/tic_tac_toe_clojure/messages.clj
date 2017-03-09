@@ -1,5 +1,6 @@
 (ns tic-tac-toe-clojure.messages
-  (:require [clojure.string :as string]))
+  (:require [clojure.string :as string]
+            [tic-tac-toe-clojure.board :as board]))
 
 (defn player-turn [marker]
   (str "It is Player " (string/upper-case (name marker)) "'s turn"))
@@ -19,23 +20,23 @@
 (defn valid-marker []
   "Please enter a valid marker")
 
-(defn- convert-to-string [cell]
-  (if (number? cell)
-    cell
-    (string/upper-case (name cell))))
+(defn- add-newline-characters [message]
+  (str "\n" message "\n"))
+
+(defn- board-divider [board]
+  (let [dashes "===="
+        plus-sign "+"]
+    (->>
+        (repeat (board/board-dimension board) dashes)
+        (string/join plus-sign)
+        (add-newline-characters))))
 
 (defn board-string [board]
-  (str " "(convert-to-string (nth board 0)) " | "
-       (convert-to-string (nth board 1)) " | "
-       (convert-to-string (nth board 2))
-       "\n===+===+===\n "
-       (convert-to-string (nth board 3)) " | "
-       (convert-to-string (nth board 4)) " | "
-       (convert-to-string (nth board 5))
-       "\n===+===+===\n "
-       (convert-to-string (nth board 6)) " | "
-       (convert-to-string (nth board 7)) " | "
-       (convert-to-string (nth board 8)) "\n"))
+  (->>
+    (map #(board/convert-space-to-string %) board)
+    (partition (board/board-dimension board))
+    (map #(clojure.string/join "|" %))
+    (clojure.string/join (board-divider board))))
 
 (defn game-instructions  []
   "Please select your marker by entering a character between A-Z")

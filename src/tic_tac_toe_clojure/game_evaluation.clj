@@ -19,13 +19,13 @@
 
 (defn- won-by-rows [board]
   (->
-    (map #(find-equivalent-marker %) 
+    (map #(find-equivalent-marker %)
          (split-board-by-rows board))
     (find-winning-value)))
 
 (defn- split-board-by-columns [board]
   (apply map list (split-board-by-rows board)))
-                   
+
 (defn- won-by-columns [board]
   (->
     (map #(find-equivalent-marker %) (split-board-by-columns board))
@@ -33,14 +33,14 @@
 
 (defn- diagonal-top-to-bottom [board]
   (let [board-width (board/board-dimension board)]
-        (map #(get board %) 
-              (map #(* % (dec board-width)) 
+        (map #(get board %)
+              (map #(* % (dec board-width))
                    (range 1 (inc board-width))))))
 
 (defn- diagonal-bottom-to-top [board]
   (let [board-width (board/board-dimension board)]
-        (map #(get board %) 
-             (map #(* % (inc board-width)) 
+        (map #(get board %)
+             (map #(* % (inc board-width))
                   (range 0 board-width)))))
 
 (defn- won-by-diagonals [board]
@@ -51,7 +51,7 @@
         (partition (board/board-dimension board))
         (map #(find-equivalent-marker %))
         (find-winning-value))))
-      
+
 (defn tied? [current-board]
   (empty? (board/open-spaces current-board)))
 
