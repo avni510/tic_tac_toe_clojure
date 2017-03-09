@@ -8,5 +8,4 @@
 
 (defmethod ai-move :simple-computer [params]
   (let [board (:board params)]
-    (->
-        (simple-computer-move board))))
+    (simple-computer-move board)))
