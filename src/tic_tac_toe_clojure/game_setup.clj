@@ -3,6 +3,7 @@
             [tic-tac-toe-clojure.messages :as messages]
             [tic-tac-toe-clojure.console-ui :as console-ui]
             [tic-tac-toe-clojure.player-setup :as player-setup]
+            [tic-tac-toe-clojure.board :as board]
             [clojure.string :as string]))
 
 (defn- invalid-marker [errors-hash]
@@ -21,8 +22,7 @@
   (->
     (console-ui/get-user-input)
     (valid-marker-loop)
-    (string/lower-case)
-    (keyword)))
+    (board/string->marker)))
 
 (defn- computer-marker-message [computer-player-map]
   (-> (:marker computer-player-map)

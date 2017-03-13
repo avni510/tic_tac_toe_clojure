@@ -95,4 +95,12 @@
 
     (context "the space is occupied"
       (it "returns a string of the space on the board and the space is a keyword"
-        (should= "  X " (convert-space-to-string :x))))))
+        (should= "  X " (convert-space-to-string :x)))))
+
+  (describe "marker->string"
+    (it "returns the marker as an uppercase string"
+       (should= "X" (marker->string :x))))
+
+  (describe "string->marker"
+    (it "returns a string of the marker"
+       (should= :x (string->marker "X")))))

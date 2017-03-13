@@ -19,3 +19,9 @@
       (str "  " space " ")
       (str " " space " "))
     (str "  " (string/upper-case (name space)) " ")))
+
+(defn marker->string [marker]
+  (-> marker name string/upper-case))
+
+(defn string->marker [string]
+  (-> string string/lower-case keyword))

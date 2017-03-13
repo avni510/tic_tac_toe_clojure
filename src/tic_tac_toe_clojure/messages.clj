@@ -3,7 +3,7 @@
             [tic-tac-toe-clojure.board :as board]))
 
 (defn player-turn [marker]
-  (str "It is Player " (string/upper-case (name marker)) "'s turn"))
+  (str "It is Player " (board/marker->string marker) "'s turn"))
 
 (defn player-move []
   "Please enter your move by selecting a number between 0 and 8")
@@ -12,10 +12,10 @@
   "The game ended in a tie")
 
 (defn won-game [marker]
-  (str "The game is won by the player with marker " (string/upper-case (name marker))))
+  (str "The game is won by the player with marker " (board/marker->string marker)))
 
 (defn pick-marker [marker1 marker2]
-  (str "Please pick either '" (string/upper-case (name marker1)) "' or '" (string/upper-case (name marker2)) "' for your marker"))
+  (str "Please pick either '" (board/marker->string marker1) "' or '" (board/marker->string marker2) "' for your marker"))
 
 (defn valid-marker []
   "Please enter a valid marker")
@@ -51,7 +51,7 @@
   (str "The computer selected cell " cell))
 
 (defn computer-marker [marker]
-  (str "The computer is marker " (string/upper-case (name marker))))
+  (str "The computer is marker " (board/marker->string marker)))
 
 (defn game-type-instructions []
   "Please select which type of game you would like to play")
