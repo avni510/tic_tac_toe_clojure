@@ -30,7 +30,7 @@
                              :current-player {:player-type :hard-computer :marker :x}
                              :opponent-player {:player-type :human :marker :o}}))
 
-        (should= 5 (ai-move {:board [
+        (should= 1 (ai-move {:board [
                                      :x 1 :x
                                      3 :o 5
                                      :o :o :x]
