@@ -2,17 +2,19 @@
   (:require [speclj.core :refer :all]
             [tic-tac-toe-clojure.messages :refer :all]))
 
-
 (describe "Messages"
   (describe "player-turn"
     (it "returns a string stating whose turn it is"
       (should= "It is Player X's turn"
                (player-turn :x))))
 
-  (describe "player-move"
+  (describe "player-move-instructions"
     (it "returns a string stating the user to enter their move"
       (should= "Please enter your move by selecting a number between 0 and 8"
-               (player-move))))
+               (player-move-instructions [
+                                           0 :x 2
+                                           3  4 5
+                                           6  7 8]))))
 
   (describe "tied-game"
     (it "returns a string stating the game is tied"
@@ -78,6 +80,10 @@
                (computer-marker :x))))
 
   (describe "game-type-instructions"
+    (it "displays a string stating instructions to select a game type"
+      (should= "Please select which type of game you would like to play" (game-type-instructions))))
+
+  (describe "board-type-instructions"
     (it "displays a string stating instructions to select a game type"
       (should= "Please select which type of game you would like to play" (game-type-instructions))))
 

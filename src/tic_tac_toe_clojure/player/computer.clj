@@ -13,6 +13,6 @@
     (console-ui/print-message (messages/blank-space))
     (let [move (computer-move/ai-move params)
           updated-board (board/fill-board move board computer-marker)]
-      (console-ui/print-message (messages/board-string board))
+      (console-ui/print-message (messages/board-string updated-board))
       (console-ui/print-message (messages/computer-move move))
       updated-board)))

@@ -1,6 +1,7 @@
 (ns tic-tac-toe-clojure.game-loop-spec
   (:require [speclj.core :refer :all]
             [tic-tac-toe-clojure.game-loop :refer :all]
+            [tic-tac-toe-clojure.player.computer-move :refer [ai-move]]
             [tic-tac-toe-clojure.helpers :as helpers]))
 
 (def current-board
@@ -20,7 +21,6 @@
   (describe "run"
     (around [it]
       (with-out-str (it)))
-
     (context "the game ends in a tie"
       (it "continues to ask the user for their move until the game is over"
         (with-redefs [helpers/random-number (fn [open-spaces-sequence] 3)]
@@ -47,7 +47,6 @@
                        (run [
                               0  1  2
                               3  4  5
-                              6  7  8
-                             ]
+                              6  7  8]
                              {:player-type :human :marker :x}
                              {:player-type :simple-computer :marker :o}))))))))

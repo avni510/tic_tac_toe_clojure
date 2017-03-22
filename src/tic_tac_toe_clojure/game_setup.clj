@@ -30,15 +30,17 @@
       (console-ui/print-message)))
 
 (defn- determine-players [game-type human-marker]
-  (if (= game-type :human-v-simple-computer)
-    [(player-setup/create-human-player human-marker)
-     (player-setup/create-simple-computer-player human-marker)]
-    [(player-setup/create-human-player human-marker)
-     (player-setup/create-hard-computer-player human-marker)]))
+  (cond
+    (= game-type :human-v-simple-computer) [(player-setup/create-human-player human-marker)
+                                            (player-setup/create-simple-computer-player human-marker)]
+    (= game-type :human-v-hard-computer) [(player-setup/create-human-player human-marker)
+                                          (player-setup/create-hard-computer-player human-marker)]
+    :else (throw (Exception. "invalid game type"))))
 
 (defn game-players [game-type human-marker]
-  (let [[human-player computer-player]
-        (determine-players game-type human-marker)]
+  (let [[human-player computer-player] (determine-players
+                                         game-type
+                                         human-marker)]
     (computer-marker-message computer-player)
     (console-ui/print-message (messages/blank-space))
     [human-player computer-player]))

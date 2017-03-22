@@ -5,8 +5,8 @@
 (defn player-turn [marker]
   (str "It is Player " (board/marker->string marker) "'s turn"))
 
-(defn player-move []
-  "Please enter your move by selecting a number between 0 and 8")
+(defn player-move-instructions [board]
+  (str "Please enter your move by selecting a number between 0 and " (dec (count board))))
 
 (defn tied-game []
   "The game ended in a tie")
@@ -52,6 +52,9 @@
 
 (defn computer-marker [marker]
   (str "The computer is marker " (board/marker->string marker)))
+
+(defn board-type-instructions []
+  "Please select which type of board you would like to play")
 
 (defn game-type-instructions []
   "Please select which type of game you would like to play")

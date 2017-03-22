@@ -9,10 +9,10 @@
 (describe "Game Type"
   (describe "invalid-game-type?"
     (it "returns false if game type entered is a key in the game menu"
-      (should= false (invalid-game-type? game-menu :1)))
+      (should= false (invalid-game-type? game-menu "1")))
 
     (it "returns true if game type entered is a letter and is not a key in the game menu"
-      (should= true (invalid-game-type? game-menu :z)))
+      (should= true (invalid-game-type? game-menu "z")))
 
     (it "returns true if game type entered is a integer and is not a key in the game menu"
-      (should= true (invalid-game-type? game-menu :5)))))
+      (should= true (invalid-game-type? game-menu "5")))))

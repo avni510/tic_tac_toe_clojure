@@ -49,7 +49,22 @@
                     :o  :o :o 11
                     12  13 14 15
                    ]
-                   :o)))))
+                   :o))
+        (should=  [
+                    :x  :x  :x  :x
+                    :x  :x   :o   :o
+                    :o  :o  :o   :x
+                    :o  :x  :x   :o]
+                  (fill-board
+                    3
+                    [
+                        :x  :x  :x  3
+                        :x  :x   :o   :o
+                        :o  :o  :o   :x
+                        :o  :x  :x   :o]
+                    :x)
+
+          ))))
 
   (describe "is-open?"
     (it "takes in a space and returns false if the cell is occupied"
