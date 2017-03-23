@@ -1,4 +1,4 @@
-(ns tic-tac-toe-clojure.game-setup
+(ns tic-tac-toe-clojure.game-type-setup
   (:require [tic-tac-toe-clojure.validation :as validation]
             [tic-tac-toe-clojure.messages :as messages]
             [tic-tac-toe-clojure.console-ui :as console-ui]

@@ -15,8 +15,8 @@
       (recur (invalid-move errors-hash) board)
       move)))
 
-(defn- select-move [board player-map]
-  (console-ui/print-message (messages/player-move))
+(defn- select-move [board human-player]
+  (console-ui/print-message (messages/player-move-instructions board))
   (console-ui/print-message (messages/blank-space))
   (->
     (console-ui/get-user-input)
@@ -25,10 +25,10 @@
 
 (defmethod play-turn :human [params]
   (let [board (:board params)
-        player-map (:current-player params)
-        human-marker (:marker player-map)]
+        human-player (:current-player params)
+        human-marker (:marker human-player)]
     (console-ui/print-message (messages/player-turn human-marker))
     (console-ui/print-message (messages/board-string board))
     (->
-      (select-move board player-map)
+      (select-move board human-player)
       (board/fill-board board human-marker))))

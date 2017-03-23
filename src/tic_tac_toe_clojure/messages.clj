@@ -1,41 +1,42 @@
 (ns tic-tac-toe-clojure.messages
-  (:require [clojure.string :as string]))
+  (:require [clojure.string :as string]
+            [tic-tac-toe-clojure.board :as board]))
 
 (defn player-turn [marker]
-  (str "It is Player " (string/upper-case (name marker)) "'s turn"))
+  (str "It is Player " (board/marker->string marker) "'s turn"))
 
-(defn player-move []
-  "Please enter your move by selecting a number between 0 and 8")
+(defn player-move-instructions [board]
+  (str "Please enter your move by selecting a number between 0 and " (dec (count board))))
 
 (defn tied-game []
   "The game ended in a tie")
 
 (defn won-game [marker]
-  (str "The game is won by the player with marker " (string/upper-case (name marker))))
+  (str "The game is won by the player with marker " (board/marker->string marker)))
 
 (defn pick-marker [marker1 marker2]
-  (str "Please pick either '" (string/upper-case (name marker1)) "' or '" (string/upper-case (name marker2)) "' for your marker"))
+  (str "Please pick either '" (board/marker->string marker1) "' or '" (board/marker->string marker2) "' for your marker"))
 
 (defn valid-marker []
   "Please enter a valid marker")
 
-(defn- convert-to-string [cell]
-  (if (number? cell)
-    cell
-    (string/upper-case (name cell))))
+(defn- add-newline-characters [message]
+  (str "\n" message "\n"))
+
+(defn- board-divider [board]
+  (let [dashes "===="
+        plus-sign "+"]
+    (->>
+        (repeat (board/board-dimension board) dashes)
+        (string/join plus-sign)
+        (add-newline-characters))))
 
 (defn board-string [board]
-  (str " "(convert-to-string (nth board 0)) " | "
-       (convert-to-string (nth board 1)) " | "
-       (convert-to-string (nth board 2))
-       "\n===+===+===\n "
-       (convert-to-string (nth board 3)) " | "
-       (convert-to-string (nth board 4)) " | "
-       (convert-to-string (nth board 5))
-       "\n===+===+===\n "
-       (convert-to-string (nth board 6)) " | "
-       (convert-to-string (nth board 7)) " | "
-       (convert-to-string (nth board 8)) "\n"))
+  (->>
+    (map #(board/convert-space-to-string %) board)
+    (partition (board/board-dimension board))
+    (map #(clojure.string/join "|" %))
+    (clojure.string/join (board-divider board))))
 
 (defn game-instructions  []
   "Please select your marker by entering a character between A-Z")
@@ -50,7 +51,10 @@
   (str "The computer selected cell " cell))
 
 (defn computer-marker [marker]
-  (str "The computer is marker " (string/upper-case (name marker))))
+  (str "The computer is marker " (board/marker->string marker)))
+
+(defn board-type-instructions []
+  "Please select which type of board you would like to play")
 
 (defn game-type-instructions []
   "Please select which type of game you would like to play")

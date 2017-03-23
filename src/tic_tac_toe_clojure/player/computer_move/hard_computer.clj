@@ -1,14 +1,16 @@
-(ns tic-tac-toe-clojure.player.computer-move.hard-computer
-  (:require [tic-tac-toe-clojure.game-evaluation :as game-evaluation]
+(ns tic-tac-toe-clojure.player.computer-move.hard-computer (:require [tic-tac-toe-clojure.game-evaluation :as game-evaluation]
             [tic-tac-toe-clojure.board :as board]
             [tic-tac-toe-clojure.player.computer-move :refer [ai-move]]))
 
-(defn- determine-player-marker [depth computer-marker opponent-marker]
-  (if (zero? (mod depth 2))
-   computer-marker
-   opponent-marker))
+(def best-possible-score
+  99)
 
-(defn- calculate-score [board computer-marker opponent-marker depth]
+(defn determine-initial-score [depth]
+  (if (zero? (mod depth 2))
+    -100
+    100))
+
+(defn calculate-score [board computer-marker opponent-marker depth]
   (let [winning-marker (game-evaluation/winning-marker board)]
     (if winning-marker
       (if (= winning-marker computer-marker)
@@ -16,51 +18,77 @@
         (- depth 100))
     0)))
 
-(defn- generate-boards [current-player-marker board]
-  (map #(board/fill-board % board current-player-marker)
+(defn generate-boards [current-player-marker board]
+  (map #(hash-map :space % :board (board/fill-board % board current-player-marker))
        (board/open-spaces board)))
 
-(declare optimal-score)
-
-(defn- retrieve-score [board computer-marker opponent-marker depth]
-  (if (game-evaluation/game-over? board)
-    (calculate-score board computer-marker opponent-marker depth)
-    (->
-       (determine-player-marker depth computer-marker opponent-marker)
-       (generate-boards board)
-       (optimal-score computer-marker opponent-marker (inc depth)))))
-
-(defn- min-or-max [depth]
+(defn- determine-player-marker [depth computer-marker opponent-marker]
   (if (zero? (mod depth 2))
-    min
-    max))
+    opponent-marker
+    computer-marker))
 
-(defn- optimal-score
-  [sequence-boards computer-marker opponent-marker depth]
-  (->>
-      (map #(retrieve-score % computer-marker opponent-marker depth)
-           sequence-boards)
-      (apply (min-or-max depth))))
+(def best-move (memoize (fn [accumulator]
+  (let [board (:board (:board-and-space accumulator))
+        space (:space (:board-and-space accumulator))
+        depth (:depth accumulator)
+        alpha (:alpha accumulator)
+        beta (:beta accumulator)
+        parent-accumulator (:parent-accumulator accumulator)
+        children (:children accumulator)
+        computer-marker (:computer-marker (:markers accumulator))
+        opponent-marker (:opponent-marker (:markers accumulator))]
 
-(defn- scores-map [board computer-marker opponent-marker]
-  (map #(hash-map %
-          (optimal-score
-            (lazy-seq (vector (board/fill-board % board computer-marker)))
-            computer-marker
-            opponent-marker
-            1))
-          (board/open-spaces board)))
-
-(defn- best-move [move-score-map]
-  (->> move-score-map
-       (apply merge)
-       (apply max-key val)
-       (key)))
+    (if (and (zero? depth) (or (empty? children) (= (:score accumulator) best-possible-score)))
+      space
+      (do
+        (if (or (game-evaluation/game-over? board) (empty? children) (<= beta alpha))
+          (let [score (if (game-evaluation/game-over? board)
+                        (calculate-score board computer-marker opponent-marker depth)
+                        (:score accumulator))]
+            (if (zero? (mod depth 2))
+              (if (< score (:score parent-accumulator))
+                (if (= depth 1)
+                  (recur (assoc parent-accumulator :children (rest (:children parent-accumulator))
+                                                   :score score
+                                                   :beta (min score (:beta parent-accumulator))
+                                                   :board-and-space (assoc (:board-and-space parent-accumulator)
+                                                                           :space space)))
+                  (recur (assoc parent-accumulator :children (rest (:children parent-accumulator))
+                                                   :beta (min score (:beta parent-accumulator))
+                                                   :score score)))
+                (recur (assoc parent-accumulator :children (rest (:children parent-accumulator)))))
+              (if (> score (:score parent-accumulator))
+                (if (= depth 1)
+                  (recur (assoc parent-accumulator :children (rest (:children parent-accumulator))
+                                                   :score score
+                                                   :alpha (max score (:alpha parent-accumulator))
+                                                   :board-and-space (assoc (:board-and-space parent-accumulator)
+                                                                           :space space)))
+                  (recur (assoc parent-accumulator :children (rest (:children parent-accumulator))
+                                                   :alpha (max score (:alpha parent-accumulator))
+                                                   :score score)))
+                (recur (assoc parent-accumulator :children (rest (:children parent-accumulator)))))))
+          (recur {:board-and-space (first children)
+                  :score (determine-initial-score (inc depth))
+                  :depth (inc depth)
+                  :alpha alpha
+                  :beta beta
+                  :parent-accumulator accumulator
+                  :children (generate-boards (determine-player-marker (+ 2 depth)
+                                                                      computer-marker
+                                                                      opponent-marker)
+                                             (:board (first children)))
+                  :markers (:markers accumulator)}))))))))
 
 (defmethod ai-move :hard-computer [params]
   (let [board (:board params)
         current-player (:current-player params)
         opponent-player (:opponent-player params)]
-    (-> (scores-map board (:marker current-player)
-                                  (:marker opponent-player))
-        (best-move))))
+    (best-move {:board-and-space {:board board :space nil}
+                :score -100
+                :depth 0
+                :alpha -100
+                :beta 100
+                :parent-accumulator nil
+                :markers {:computer-marker (:marker current-player) :opponent-marker (:marker opponent-player)}
+                :children (generate-boards (:marker current-player) board)})))

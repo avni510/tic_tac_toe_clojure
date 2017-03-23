@@ -1,5 +1,6 @@
 (ns tic-tac-toe-clojure.player-setup
   (:require [clojure.string :as string]
+            [tic-tac-toe-clojure.board :as board]
             [tic-tac-toe-clojure.helpers :as helpers]))
 
 (def letters-in-alphabet
@@ -17,8 +18,7 @@
     (+ letter-a-ascii-value)
     (char)
     (str)
-    (string/lower-case)
-    (keyword)))
+    (board/string->marker)))
 
 (defn- computer-marker [human-marker]
   (let [opponent-marker (generate-computer-marker)]

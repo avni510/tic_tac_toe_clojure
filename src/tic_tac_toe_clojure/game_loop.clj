@@ -6,6 +6,6 @@
   (if (game-evaluation/game-over? current-board)
     current-board
     (recur (player/play-turn {:board current-board
-                                   :current-player current-player
-                                   :opponent-player opponent-player})
+                              :current-player current-player
+                              :opponent-player opponent-player})
             opponent-player current-player)))

@@ -9,6 +9,5 @@
                                   :simple-computer :computer
                                   :hard-computer :computer}))))
 
-
 (defmethod play-turn :default [params]
   (console-ui/print-message (messages/invalid-player-type)))

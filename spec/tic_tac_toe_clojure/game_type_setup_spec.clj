@@ -1,6 +1,6 @@
-(ns tic-tac-toe-clojure.game-setup-spec
+(ns tic-tac-toe-clojure.game-type-setup-spec
   (:require [speclj.core :refer :all]
-            [tic-tac-toe-clojure.game-setup :refer :all]
+            [tic-tac-toe-clojure.game-type-setup :refer :all]
             [tic-tac-toe-clojure.helpers :as helpers]))
 
 (def x-alpha-value
@@ -32,4 +32,8 @@
       (it "returns a vector of two maps and the first value is the first player"
         (with-redefs [helpers/random-number (fn [letters-in-alphabet-sequence] x-alpha-value)]
           (should= [{:player-type :human :marker :o} {:player-type :hard-computer :marker :x}]
-                   (game-players :human-v-hard-computer :o)))))))
+                   (game-players :human-v-hard-computer :o))))
+
+      (it "raises and error if it is an invalid game type"
+        (should= "caught : invalid game type" (try (game-players :hello_world :o)
+                                                   (catch Exception e (str "caught : " (.getMessage e)))))))))

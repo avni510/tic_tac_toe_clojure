@@ -1,70 +1,73 @@
 (ns tic-tac-toe-clojure.player.computer-move.hard-computer-spec
   (:require [speclj.core :refer :all]
+            [tic-tac-toe-clojure.game-evaluation :as game-evaluation]
+            [tic-tac-toe-clojure.board :as board]
             [tic-tac-toe-clojure.player.computer-move :refer [ai-move]]
             [tic-tac-toe-clojure.player.computer-move.hard-computer :refer :all]))
 
+(def human-marker
+  :x)
+
+(def computer-marker
+  :o)
+
+(def empty-3X3-board
+  [0  1  2
+    3  4  5
+    6  7  8])
+
 (describe "Hard Computer"
   (describe "ai-move"
-    (context "there are two spots open"
-      (it "returns the spots where the computer is most likely to win"
-        (should= 4 (ai-move {:board [
-                                     :o :o :x
-                                     :x 4 :o
-                                     :x 7 :o]
-                             :current-player {:player-type :hard-computer :marker :x}
-                             :opponent-player {:player-type :human :marker :o}}))
+    (context "the human is the first player and the computer is the second player"
+      (defn- simulate-human-move [markers boards]
+        (mapcat (fn[board] (map #(board/fill-board % board (:human-marker markers))
+                                 (board/open-spaces board))) boards))
 
-        (should= 8 (ai-move {:board [
-                                     :o :x 2
-                                     :x :x :o
-                                     :o :o 8]
-                             :current-player {:player-type :hard-computer :marker :x}
-                             :opponent-player {:player-type :human :marker :o}}))))
+      (defn- simulate-computer-move [markers boards]
+        (let [human-marker (:human-marker markers)
+              computer-marker (:computer-marker markers)]
+        (map #(->
+                (ai-move {:board %
+                          :current-player {:player-type :hard-computer :marker computer-marker}
+                          :opponent-player {:player-type :human :marker human-marker}})
+                (board/fill-board % computer-marker))
+              boards)))
 
-    (context "there are three spots open"
-      (it "returns the spots where the computer is most likely to win"
-        (should= 4 (ai-move {:board [
-                                     :o :o :x
-                                     :x 4 5
-                                     :x 7 :o]
-                             :current-player {:player-type :hard-computer :marker :x}
-                             :opponent-player {:player-type :human :marker :o}}))
+      (defn- add-to-completed-boards [game-over-boards completed-boards]
+         (if (empty? game-over-boards)
+           completed-boards
+           (conj completed-boards game-over-boards)))
 
-        (should= 5 (ai-move {:board [
-                                     :x 1 :x
-                                     3 :o 5
-                                     :o :o :x]
-                             :current-player {:player-type :hard-computer :marker :x}
-                             :opponent-player {:player-type :human :marker :o}}))
+      (defn- game-over-states [simulate-move-functions in-progress-boards completed-boards]
+        (let [move-function (first simulate-move-functions)
+              game-over-boards (filter #(game-evaluation/game-over? %) in-progress-boards)]
+          (if (empty? in-progress-boards)
+            completed-boards
+            (recur (reverse simulate-move-functions)
+                   (move-function (remove #(game-evaluation/game-over? %) in-progress-boards))
+                   (add-to-completed-boards game-over-boards completed-boards)))))
 
-        (should= 6 (ai-move {:board [
-                                     0 :x :o
-                                     :x :o 5
-                                     6 :o :x]
-                             :current-player {:player-type :hard-computer :marker :x}
-                             :opponent-player {:player-type :human :marker :o}}))))
+      (context "it is a 3X3 board"
+        (def all-game-over-states
+           (apply concat
+                  (game-over-states
+                    [(partial simulate-human-move
+                              {:computer-marker computer-marker :human-marker human-marker})
+                     (partial simulate-computer-move
+                              {:computer-marker computer-marker :human-marker human-marker})]
+                     (seq (vector empty-3X3-board)) [])))
 
-    (context "there are four spots open"
-      (it "returns the spots where the computer is most likely to win"
-         (should= 4 (ai-move {:board [
-                                      :o :o :x
-                                      3 4 5
-                                      :x 7 :o]
-                              :current-player {:player-type :hard-computer :marker :x}
-                              :opponent-player {:player-type :human :marker :o}}))
+        (it "only has end states of the board in the sequence all-game-over-states"
+          (should= (count all-game-over-states)
+                   (reduce (fn [count-game-over-boards game-over-board]
+                             (if (game-evaluation/game-over? game-over-board)
+                               (inc count-game-over-boards)
+                               count-game-over-boards))
+                           0 all-game-over-states)))
 
-         (should= 8 (ai-move {:board [
-                                      0 :x :o
-                                      3 :x 5
-                                      :o :o 8]
-                              :current-player {:player-type :hard-computer :marker :x}
-                              :opponent-player {:player-type :human :marker :o}}))))
-
-    (context "there are six spots open"
-      (it "returns the spots where the computer is most likely to win"
-         (should= 3 (ai-move {:board  [
-                                       :x 1 2
-                                       3 :o 5
-                                       :x 7 8]
-                              :current-player {:player-type :hard-computer :marker :o}
-                              :opponent-player {:player-type :human :marker :x}}))))))
+        (it "never lets the human win the game"
+          (should= 0 (reduce (fn [count-wins-by-human game-over-board]
+                               (if (= human-marker (game-evaluation/winning-marker game-over-board))
+                                 (inc count-wins-by-human)
+                                 count-wins-by-human))
+                             0 all-game-over-states)))))))
