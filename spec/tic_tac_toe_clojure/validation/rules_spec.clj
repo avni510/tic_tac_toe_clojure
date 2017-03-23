@@ -8,8 +8,7 @@
     :o  :o :x])
 
 (def sixteen-space-board
-   [
-    :x  1  2  3
+   [:x  1  2  3
     4   5  :x 7
     :o  :o :o 11
     12  13 14 15])

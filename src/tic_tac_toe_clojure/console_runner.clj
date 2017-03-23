@@ -3,7 +3,7 @@
             [tic-tac-toe-clojure.game-completion :as game-completion]
             [tic-tac-toe-clojure.console-ui :as console-ui]
             [tic-tac-toe-clojure.messages :as messages]
-            [tic-tac-toe-clojure.game-setup :as game-setup]
+            [tic-tac-toe-clojure.game-type-setup :as game-type-setup]
             [tic-tac-toe-clojure.board-setup :as board-setup]
             [tic-tac-toe-clojure.game-selection :as game-selection]
             [tic-tac-toe-clojure.player-setup :as player-setup]))
@@ -25,8 +25,8 @@
                    (messages/game-type-instructions)
                    (game-selection/run game-type-menu))
         [human-player computer-player] (->>
-                                          (game-setup/select-marker)
-                                          (game-setup/game-players
+                                          (game-type-setup/select-marker)
+                                          (game-type-setup/game-players
                                             game-type))]
     (-> (game-loop/run empty-board human-player computer-player)
         (game-completion/game-over-message)

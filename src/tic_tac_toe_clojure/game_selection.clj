@@ -5,7 +5,7 @@
 
 (defn- invalid-menu-selection [errors-hash]
   (console-ui/print-message (:errors errors-hash))
-  (keyword (console-ui/get-user-input)))
+  (console-ui/get-user-input))
 
 (defn- valid-game-selection-loop [game-selection menu]
   (let [errors-hash (validation/game-type
@@ -30,7 +30,7 @@
   (dorun (map #(console-ui/print-message %) (vals menu)))
   (->
      (console-ui/get-user-input)
-     (keyword)
      (valid-game-selection-loop menu)
+     (keyword)
      (menu)
      (find-game)))

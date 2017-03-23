@@ -5,7 +5,7 @@ Tic Tac Toe written in Clojure
 
 Functionality
 ------------
-The game is currently Human V. Simple Computer
+The game can be played with a 3X3 or 4X4 board. There are two types of games that can be selected - Human V. Simple Computer and Human V. Hard Computer.
 
 
 Installation

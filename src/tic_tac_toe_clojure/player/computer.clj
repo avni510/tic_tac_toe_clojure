@@ -6,13 +6,11 @@
             [tic-tac-toe-clojure.board :as board]))
 
 (defmethod play-turn :computer [params]
-  (let [board (:board params)
-        current-player (:current-player params)
-        computer-marker (:marker current-player)]
+  (let [computer-marker (:marker (:current-player params))
+        move (computer-move/ai-move params)
+        updated-board (board/fill-board move (:board params) computer-marker)]
     (console-ui/print-message (messages/player-turn computer-marker))
     (console-ui/print-message (messages/blank-space))
-    (let [move (computer-move/ai-move params)
-          updated-board (board/fill-board move board computer-marker)]
-      (console-ui/print-message (messages/board-string updated-board))
-      (console-ui/print-message (messages/computer-move move))
-      updated-board)))
+    (console-ui/print-message (messages/board-string updated-board))
+    (console-ui/print-message (messages/computer-move move))
+    updated-board))

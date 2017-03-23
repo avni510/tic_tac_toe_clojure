@@ -1,6 +1,6 @@
-(ns tic-tac-toe-clojure.game-setup-spec
+(ns tic-tac-toe-clojure.game-type-setup-spec
   (:require [speclj.core :refer :all]
-            [tic-tac-toe-clojure.game-setup :refer :all]
+            [tic-tac-toe-clojure.game-type-setup :refer :all]
             [tic-tac-toe-clojure.helpers :as helpers]))
 
 (def x-alpha-value

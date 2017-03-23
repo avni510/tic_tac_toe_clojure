@@ -5,26 +5,25 @@
             [tic-tac-toe-clojure.player.computer-move :refer [ai-move]]
             [tic-tac-toe-clojure.player.computer-move.hard-computer :refer :all]))
 
+(def human-marker
+  :x)
+
+(def computer-marker
+  :o)
+
+(def empty-3X3-board
+  [0  1  2
+    3  4  5
+    6  7  8])
+
 (describe "Hard Computer"
   (describe "ai-move"
     (context "the human is the first player and the computer is the second player"
-      (def human-marker
-        :x)
-
-      (def computer-marker
-        :o)
-
-      (def empty-3X3-board
-        [
-          0  1  2
-          3  4  5
-          6  7  8])
-
-      (defn simulate-human-move [markers boards]
+      (defn- simulate-human-move [markers boards]
         (mapcat (fn[board] (map #(board/fill-board % board (:human-marker markers))
                                  (board/open-spaces board))) boards))
 
-      (defn simulate-computer-move [markers boards]
+      (defn- simulate-computer-move [markers boards]
         (let [human-marker (:human-marker markers)
               computer-marker (:computer-marker markers)]
         (map #(->
@@ -34,12 +33,12 @@
                 (board/fill-board % computer-marker))
               boards)))
 
-      (defn add-to-completed-boards [game-over-boards completed-boards]
+      (defn- add-to-completed-boards [game-over-boards completed-boards]
          (if (empty? game-over-boards)
            completed-boards
            (conj completed-boards game-over-boards)))
 
-      (defn game-over-states [simulate-move-functions in-progress-boards completed-boards]
+      (defn- game-over-states [simulate-move-functions in-progress-boards completed-boards]
         (let [move-function (first simulate-move-functions)
               game-over-boards (filter #(game-evaluation/game-over? %) in-progress-boards)]
           (if (empty? in-progress-boards)
@@ -70,4 +69,5 @@
           (should= 0 (reduce (fn [count-wins-by-human game-over-board]
                                (if (= human-marker (game-evaluation/winning-marker game-over-board))
                                  (inc count-wins-by-human)
-                                 count-wins-by-human)) 0 all-game-over-states)))))))
+                                 count-wins-by-human))
+                             0 all-game-over-states)))))))

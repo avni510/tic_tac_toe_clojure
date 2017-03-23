@@ -16,8 +16,7 @@
 
     (context "the player type is a human"
       (it "prompts the user to enter their move and returns a board"
-        (should= [
-                  :x  1   2
+        (should= [:x  1   2
                    3  4   :x
                   :o  :o  :x]
                  (with-in-str "8"
@@ -26,8 +25,7 @@
 
       (context "the user enters an invalid move"
         (it "continues to prompts the user to enter another move"
-          (should= [
-                    :x  1   2
+          (should= [:x  1   2
                      3  4   :x
                     :o  :o  :o]
                    (with-in-str "8\n#\n    \nfive\n4.35"

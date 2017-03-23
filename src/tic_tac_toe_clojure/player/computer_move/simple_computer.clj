@@ -7,5 +7,6 @@
   (helpers/random-number (board/open-spaces board)))
 
 (defmethod ai-move :simple-computer [params]
-  (let [board (:board params)]
-    (simple-computer-move board)))
+  (->
+    (:board params)
+    (simple-computer-move)))
